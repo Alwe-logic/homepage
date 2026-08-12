@@ -1,0 +1,21 @@
+---
+interface Props {
+  number: string | number;
+  source: string;
+  locator?: string;
+}
+
+const { number, source, locator } = Astro.props;
+const isEnglish = Astro.currentLocale === 'en';
+const citationText = `${number}${locator ? `, ${locator}` : ''}`;
+const accessibleLabel = isEnglish
+  ? `Reference ${citationText}`
+  : `参考文献 ${citationText}`;
+---
+
+<a
+  class="citation"
+  href={`#ref-${source}`}
+  aria-label={accessibleLabel}
+  title={accessibleLabel}
+>[{citationText}]</a>

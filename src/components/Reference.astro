@@ -1,0 +1,19 @@
+---
+interface Props {
+  id: string;
+  number: number;
+  href?: string;
+  linkLabel?: string;
+}
+
+const { id, number, href, linkLabel = 'DOI' } = Astro.props;
+---
+
+<li id={`ref-${id}`} value={number} class="reference-entry">
+  <div class="reference-entry__text"><slot /></div>
+  {href && (
+    <span class="reference-entry__link">
+      <a href={href}>{linkLabel}</a>
+    </span>
+  )}
+</li>

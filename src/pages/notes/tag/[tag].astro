@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { notesJa } from '../../../data/notes.js';
+
+export function getStaticPaths() {
+  const publishedNotes = notesJa.filter((note) => note.published !== false);
+  const tags = [...new Map(publishedNotes.flatMap((note) => note.tags.map((tag) => [tag.slug, tag])).values()).values()];
+  return tags.map((tag) => ({ params: { tag: tag.slug }, props: { tag, notes: publishedNotes.filter((note) => note.tags.some((noteTag) => noteTag.slug === tag.slug)) } }));
+}
+
+const { tag, notes } = Astro.props;
+---
+<BaseLayout title={`タグ: ${tag.label}`}><section class="page-intro"><p class="tag-kicker">Notes tag</p><h1>#{tag.label}</h1><p>このタグが付いたノートの一覧です。</p></section><section class="section"><div class="notes-list">{notes.map((note) => <article class="note-item"><div class="note-meta"><time class="note-date">{note.date}</time><span class="note-category">{note.category}</span></div><div><h3>{note.href ? <a href={note.href}>{note.title}</a> : note.title}</h3><p>{note.excerpt}</p><div class="note-tags">{note.tags.map((noteTag) => <a class="note-tag" href={`/notes/tag/${noteTag.slug}/`}>#{noteTag.label}</a>)}</div></div></article>)}</div></section></BaseLayout>

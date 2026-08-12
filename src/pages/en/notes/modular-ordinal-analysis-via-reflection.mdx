@@ -1,0 +1,402 @@
+---
+layout: ../../../layouts/DraftLayout.astro
+title: A Modular Ordinal Analysis via Reflection
+description: Worms, dilators, ω-model reflection, and conservation spectra in second-order arithmetic.
+---
+import MathStatement from '../../../components/MathStatement.astro';
+import Citation from '../../../components/Citation.astro';
+import Reference from '../../../components/Reference.astro';
+
+<div class="post-meta"><span>Research note</span><time>2026.08.12</time></div>
+
+# A Modular Ordinal Analysis via Reflection
+
+This note combines Beklemishev’s worms, viewed as finite representations of iterated reflection<Citation number="1" source="beklemishev2004" />, with transfinite iterations of reflection indexed by Girard’s dilators<Citation number="2" source="girard1981" />. Its goal is to describe conservation spectra for theories of second-order arithmetic. The text is a web-oriented reconstruction of the research draft *modular ordinal analysis via reflection*.
+
+We work mainly over $\mathsf{ACA}_0$, following Simpson<Citation number="3" source="simpson2009" /> for the standard subsystems of second-order arithmetic and their $\omega$-models. The notation $\Pi^1_k\text{-}\omega\mathsf{RFN}(T)$ denotes $\Pi^1_k$ $\omega$-model reflection over a theory $T$.
+
+## 1. Worms and ordinal assignments
+
+<MathStatement kind="definition" number="1.1" title="Worms">
+
+For $n\in\omega$, define the set $\mathbb W_n$ of worms inductively:
+
+1. $\top\in\mathbb W_n$.
+2. If $m\ge n$ and $w\in\mathbb W_n$, then $\langle m\rangle w\in\mathbb W_n$.
+
+Define a relation $\prec_n$ on $\mathbb W_n$ by
+
+$$
+w\prec_n w'
+\quad\Longleftrightarrow\quad
+\mathsf{RC}\vdash w'\rightarrow\langle n\rangle w.
+$$
+
+For $m\ge n$, put
+
+$$
+\langle m\rangle\mathbb W_n
+:=
+\{\langle m\rangle w:w\in\mathbb W_n\}\cup\{\top\}.
+$$
+
+</MathStatement>
+
+Here $\mathsf{RC}$ is the worm calculus governing the interaction of the modalities $\langle n\rangle$<Citation number="1" source="beklemishev2004" />. We write $\equiv_{\mathsf{RC}}$ for mutual derivability in this calculus.
+
+<MathStatement kind="definition" number="1.2" title="Ordinal assignment">
+
+Define $o=o_0:\mathbb W_0\to\varepsilon_0$ along Cantor normal forms. First,
+
+$$
+o(\langle0\rangle^k\top)=k.
+$$
+
+For $w\in\mathbb W_1$, define $w\mapsto w^-$ by
+
+$$
+\top^-:=\top,
+\qquad
+(\langle m\rangle w)^-:=\langle m-1\rangle w^-
+\quad(m\ge1).
+$$
+
+For $w_0,\ldots,w_{k-1}\in\mathbb W_1$, let
+
+$$
+o(w_0\langle0\rangle w_1\langle0\rangle\cdots\langle0\rangle w_{k-1})
+=
+\omega^{o(w_{k-1}^-)}+\cdots+\omega^{o(w_0^-)}.
+$$
+
+The general assignment $o_n:\mathbb W_n\to\varepsilon_0$ is obtained by shifting all modality indices down by $n$.
+
+</MathStatement>
+
+<MathStatement kind="proposition" number="1.3" title="Ignatiev">
+
+The map $o_n:\mathbb W_n\to\varepsilon_0$ is surjective and strictly order-preserving, and it induces an order isomorphism
+
+$$
+\mathbb W_n/{\equiv_{\mathsf{RC}}}\cong\varepsilon_0.
+$$
+
+Ignatiev normal forms $w^{\mathsf{NF}}$ provide representatives of the equivalence classes<Citation number="4" source="ignatiev1993" />.
+
+</MathStatement>
+
+<MathStatement kind="definition" number="1.4" title="Ω-assignment">
+
+Define the base change $S^\omega_\Omega:\varepsilon_0\to\mathsf{PDil}$ by
+
+$$
+S^\omega_\Omega(0)=0
+$$
+
+and
+
+$$
+S^\omega_\Omega
+(\omega^{\xi_{k-1}}+\cdots+\omega^{\xi_0})
+=
+\Omega^{S^\omega_\Omega(\xi_{k-1})}+\cdots+
+\Omega^{S^\omega_\Omega(\xi_0)}.
+$$
+
+Here $\Omega$ is the identity praedilator. Put
+
+$$
+o_n^\Omega:=S^\omega_\Omega\circ o_n.
+$$
+
+Thus the base $\omega$ in the ordinary ordinal assignment is replaced by the dilator variable $\Omega$. See Girard<Citation number="2" source="girard1981" /> for the definition and basic properties of dilators.
+
+</MathStatement>
+
+## 2. Interpreting worms by reflection
+
+<MathStatement kind="definition" number="2.1" title="Interpretation by ω-model reflection">
+
+Let $T\supseteq\mathsf{ACA}_0$ be a theory of second-order arithmetic. Define the interpretation $(w)^{\omega\mathsf{RFN}}_T$ of a worm $w\in\mathbb W_0$ by
+
+$$
+(\top)^{\omega\mathsf{RFN}}_T:=\top
+$$
+
+and
+
+$$
+(\langle m\rangle w)^{\omega\mathsf{RFN}}_T
+:=
+\Pi^1_{m+2}\text{-}\omega\mathsf{RFN}
+\bigl(T+(w)^{\omega\mathsf{RFN}}_T\bigr).
+$$
+
+The modality $\langle m\rangle$ is therefore read as one application of $\Pi^1_{m+2}$ $\omega$-model reflection.
+
+</MathStatement>
+
+This interpretation transfers the combinatorics of worms to iterations of reflection. For example, $\langle1\rangle\top$ represents $\Pi^1_3$ $\omega$-model reflection, while $\langle0\rangle\langle1\rangle\top$ adds $\Pi^1_2$ $\omega$-model reflection on top of it.
+
+## 3. Iterating reflection with dilators
+
+The following dilator-indexed iteration of reflection adapts a construction presented in a lecture by Pakhomov<Citation number="5" source="pakhomov2023" /> to the notation of the research manuscript. The presently available source is a seminar record, rather than a refereed publication.
+
+<MathStatement kind="definition" number="3.1" title="Shift">
+
+Let $\langle D;\operatorname{supp}^D\rangle$ be a praedilator and $\mathcal A$ a linear order. Define the shift $D[\mathcal A]$ by
+
+$$
+D[\mathcal A](\mathcal X):=D(\mathcal A+\mathcal X),
+\qquad
+D[\mathcal A](f):=D(\operatorname{id}_{\mathcal A}+f),
+$$
+
+with support
+
+$$
+\operatorname{supp}^{D[\mathcal A]}_{\mathcal X}(\sigma)
+:=
+\operatorname{supp}^D_{\mathcal A+\mathcal X}(\sigma)
+\mathbin{\upharpoonright}\mathcal X.
+$$
+
+</MathStatement>
+
+<MathStatement kind="proposition" number="3.2">
+
+Over $\mathsf{RCA}_0$, shifting a dilator by a well-order yields another dilator<Citation number="2" source="girard1981" />.
+
+</MathStatement>
+
+<MathStatement kind="definition" number="3.3" title="Trace and constants">
+
+The trace of a praedilator $D$ is
+
+$$
+\operatorname{Tr}(D)
+:=
+\{(n,\sigma):n\in\omega,\ \sigma\in D(n),\ 
+\operatorname{supp}^D_n(\sigma)=n\}.
+$$
+
+An element $(0,\sigma)\in\operatorname{Tr}(D)$ is called a **constant** of $D$. The set of constants is denoted by $\operatorname{Tr}_0(D)$.
+
+</MathStatement>
+
+<MathStatement kind="definition" number="3.4" title="Restriction at a constant">
+
+For $c\in\operatorname{Tr}_0(D)$, define $D\mathbin{\upharpoonright}c$ by
+
+$$
+(D\mathbin{\upharpoonright}c)(\mathcal X)
+:=
+D(\mathcal X)\mathbin{\upharpoonright}c.
+$$
+
+Its action on embeddings and its support transformation are obtained by restricting those of $D$ to this initial segment.
+
+</MathStatement>
+
+<MathStatement kind="definition" number="3.5" title="Dilator-indexed reflection">
+
+Let $T$ be a theory with an elementary recursive axiomatization, and let $\mathsf{RFN}$ be a reflection principle represented by a single formula. By the fixed-point lemma, define $\mathsf{RFN}^D(T)$ through
+
+$$
+\begin{aligned}
+\mathsf{RCA}_0\vdash\quad
+\mathsf{RFN}^D(T)\ \longleftrightarrow\ 
+&\mathsf{PDil}(D)\ \land\\
+&(\forall\mathcal X)\Bigl[
+\mathsf{WO}(\mathcal X)\to
+(\forall c\in\operatorname{Tr}_0(D[\mathcal X]))\\
+&\hspace{4em}\mathsf{RFN}
+\bigl(T+\mathsf{RFN}^{D[\mathcal X]\upharpoonright c}(T)\bigr)
+\Bigr].
+\end{aligned}
+$$
+
+Also put
+
+$$
+\mathsf R^D(T)
+:=
+T+\{\mathsf{RFN}^{D[1]\upharpoonright c}(T):
+c\in\operatorname{Tr}_0(D[1])\}.
+$$
+
+</MathStatement>
+
+<MathStatement kind="remark" number="3.6" title="Formalization">
+
+A complete formalization over the base theory requires coded praedilators<Citation number="6" source="freund2024" />. This note suppresses those coding details in order to make the structure of the conservation spectrum visible.
+
+</MathStatement>
+
+## 4. Conservation spectra
+
+Write $\alpha\llbracket k\rrbracket$ for the $k$-th member of the fundamental sequence for $\alpha$, and $U\equiv_\Gamma V$ when $U$ and $V$ have the same consequences in the class $\Gamma$.
+
+### Notation at a glance
+
+| Notation | Meaning |
+| --- | --- |
+| $\Pi^1_r\text{-}\omega\mathsf{RFN}(T)$ | $\Pi^1_r$ $\omega$-model reflection over $T$ |
+| $\Pi^1_r\text{-}\omega\mathsf{RFN}^{D}(T)$ | $\Pi^1_r$ $\omega$-model reflection iterated along a dilator $D$ |
+| $(w)^{\omega\mathsf{RFN}}_T$ | the sentence obtained by interpreting the worm $w$ as iterated reflection over $T$ |
+| $o_n(w)$ | the ordinary ordinal assignment of a worm $w\in\mathbb W_n$ |
+| $o_n^\Omega(w)=S^\omega_\Omega(o_n(w))$ | the assignment obtained by changing the base $\omega$ to the dilator variable $\Omega$ |
+| $U\equiv_\Gamma V$ | $U$ and $V$ have the same consequences in the class $\Gamma$ |
+| $\alpha\llbracket k\rrbracket$ | the $k$-th member of the fundamental sequence for $\alpha$ |
+
+The next theorem is not reproduced verbatim from an external source. It is the main result of the research manuscript, combining the frameworks of References <Citation number="1" source="beklemishev2004" /><Citation number="5" source="pakhomov2023" />. A complete proof is not yet included in this web version.
+
+<MathStatement kind="theorem" number="4.1" title="Conservation spectrum theorem">
+
+Let $n\in\omega$ and $m\ge n$. Suppose that $T$ is a $\Pi^1_{n+2}$ extension of $\mathsf{ACA}_0$ with an elementary recursive axiomatization.
+
+1. If $w\in\langle m\rangle\mathbb W_m$, then
+
+   $$
+   T+(w)^{\omega\mathsf{RFN}}_T
+   \equiv
+   T+\Pi^1_{m+2}\text{-}\omega\mathsf{RFN}^{\langle m\rangle o_m^\Omega(w)}(T).
+   $$
+
+2. If $w\in\mathbb W_m\setminus\langle m\rangle\mathbb W_m$, then
+
+   $$
+   \begin{aligned}
+   T+(w)^{\omega\mathsf{RFN}}_T
+   \equiv_{\Pi^1_{m+2}}
+   T+\{&\Pi^1_{m+2}\text{-}\omega\mathsf{RFN}^{
+   S^\omega_\Omega(o_m(w)\llbracket k\rrbracket)}(T):\\
+   &k\in\omega\}.
+   \end{aligned}
+   $$
+
+</MathStatement>
+
+In the first case, the worm assignment gives a single dilator-indexed iteration. In the second, its fundamental sequence yields a family of reflection principles, which is the conservation spectrum for the weaker formula class.
+
+## 5. Calculations
+
+<MathStatement kind="example" number="5.1" title="Σ¹₁ dependent choice">
+
+The research manuscript takes the following reflection-theoretic characterization as its starting point:
+
+$$
+\Sigma^1_1\text{-}\mathsf{DC}_0
+\equiv
+\mathsf{ACA}_0+(\langle1\rangle\top)^{\omega\mathsf{RFN}}_{\mathsf{ACA}_0}.
+$$
+
+Since $o_0(\langle1\rangle\top)=\omega$ and $\omega\llbracket k\rrbracket=k$, we obtain
+
+$$
+\Sigma^1_1\text{-}\mathsf{DC}_0
+\equiv_{\Pi^1_2}
+\mathsf{ACA}_0+
+\{\Pi^1_2\text{-}\omega\mathsf{RFN}^{k}(\mathsf{ACA}_0):k\in\omega\}.
+$$
+
+</MathStatement>
+
+<MathStatement kind="example" number="5.2" title="Arithmetical transfinite recursion">
+
+Under the reflection-theoretic characterization used in the manuscript, $\mathsf{ATR}_0$ is represented by the worm $\langle0\rangle\langle1\rangle\top$. Its ordinary assignment is $\omega+1$; after the relevant collapse and base change, the value becomes $\Omega$. Hence
+
+$$
+\mathsf{ATR}_0
+\equiv
+\mathsf{ACA}_0+
+\Pi^1_2\text{-}\omega\mathsf{RFN}^{\Omega}(\mathsf{ACA}_0).
+$$
+
+Equivalently, this has the form
+
+$$
+\mathsf{ACA}_0+
+(\forall\xi)\bigl[
+\mathsf{WO}(\xi)\to
+\Pi^1_2\text{-}\omega\mathsf{RFN}^{\xi}(\mathsf{ACA}_0)
+\bigr].
+$$
+
+</MathStatement>
+
+<MathStatement kind="example" number="5.3" title="Reflection, worms, assignments, and spectra">
+
+Organizing the calculations from the manuscript by their reflection-theoretic characterizations over $\mathsf{ACA}_0$ gives the following table. A citation marks the established characterization used as the input for a row; the worm assignment and the fourth column are calculations in this draft using Theorem 4.1.
+
+| Theory | Characterization by reflection | Worm and assignment | Conservation spectrum / dilator iteration |
+| --- | --- | --- | --- |
+| $\Sigma^1_1\text{-}\mathsf{DC}_0$ | $\mathsf{ACA}_0+\Pi^1_3\text{-}\omega\mathsf{RFN}(\mathsf{ACA}_0)$ | $\langle1\rangle\top$<br />$o_0=\omega$ | $\mathsf{ACA}_0+\{\Pi^1_2\text{-}\omega\mathsf{RFN}^{k}(\mathsf{ACA}_0):k\in\omega\}$ |
+| $\mathsf{ATR}_0$ | $\mathsf{ACA}_0+\Pi^1_2\text{-}\omega\mathsf{RFN}(\mathsf{ACA}_0+\Pi^1_3\text{-}\omega\mathsf{RFN}(\mathsf{ACA}_0))$ | $\langle0\rangle\langle1\rangle\top$<br />$o_0=\omega+1$<br />$\langle0\rangle o_0^\Omega=\Omega$ | $\mathsf{ACA}_0+\Pi^1_2\text{-}\omega\mathsf{RFN}^{\Omega}(\mathsf{ACA}_0)$ |
+| $\mathsf{ATR}_0+(\Sigma^1_1\text{-}\mathsf{DC})$ | $\mathsf{ATR}_0+\Pi^1_3\text{-}\mathsf{RFN}(\mathsf{ATR}_0)$ | $\langle1\rangle\langle0\rangle\langle1\rangle\top$<br />$o_0=\omega+\omega$ | $\mathsf{ACA}_0+\{\Pi^1_2\text{-}\omega\mathsf{RFN}^{\Omega+k}(\mathsf{ACA}_0):k\in\omega\}$ |
+| $\mathsf{FTR}_0$ | $\mathsf{ACA}_0+\Pi^1_2\text{-}\omega\mathsf{RFN}(\mathsf{ATR}_0+(\Sigma^1_1\text{-}\mathsf{DC}))$<Citation number="7" source="ruede2002" /> | $\langle0\rangle\langle1\rangle\langle0\rangle\langle1\rangle\top$<br />$o_0=\omega+\omega+1$<br />$\langle0\rangle o_0^\Omega=\Omega+\Omega$ | $\mathsf{ACA}_0+\Pi^1_2\text{-}\omega\mathsf{RFN}^{\Omega+\Omega}(\mathsf{ACA}_0)$ |
+| $\Sigma^1_1\text{-}\mathsf{TDC}_0$ | $\mathsf{ACA}_0+\Pi^1_3\text{-}\omega\mathsf{RFN}(\Sigma^1_1\text{-}\mathsf{DC}_0)$<Citation number="8" source="ruede2003" /> | $\langle1\rangle\langle1\rangle\top$<br />$o_0=\omega^2$ | $\mathsf{ACA}_0+\{\Pi^1_2\text{-}\omega\mathsf{RFN}^{\Omega\cdot(k+1)+1}(\mathsf{ACA}_0):k\in\omega\}$ |
+| $\Pi^1_l\text{-}\mathsf{BI}_0$ $(l\ge1)$ | $\mathsf{ACA}_0+\Pi^1_{l+2}\text{-}\omega\mathsf{RFN}(\mathsf{ACA}_0)$<Citation number="9" source="jager-strahm1999" /> | $\langle l\rangle\top$<br />$o_m=\omega_{l-m}$ $(m<l)$ | $\mathsf{ACA}_0+\{\Pi^1_{m+2}\text{-}\omega\mathsf{RFN}^{\Omega_{l-m-1}(k+1)}(\mathsf{ACA}_0):k\in\omega\}$ |
+| $\Sigma^0_l\text{-}\mathsf{LPP}_0$ $(l\ge2)$ | $\mathsf{ACA}_0+\Pi^1_2\text{-}\omega\mathsf{RFN}(\Pi^1_{l+1}\text{-}\mathsf{BI}_0)$<Citation number="11" source="suzuki2025" /> | $\langle0\rangle\langle l+1\rangle\top$<br />$o_0=\omega_{l+1}+1$<br />$\langle0\rangle o_0^\Omega=\Omega_{l+1}$ | $\mathsf{ACA}_0+\Pi^1_2\text{-}\omega\mathsf{RFN}^{\Omega_{l+1}}(\mathsf{ACA}_0)$ |
+
+</MathStatement>
+
+The last column must be read with a distinction between full equivalence and conservation expressed by $\equiv_{\Pi^1_r}$. Rows written as families in braces are cases where a fundamental sequence of reflection principles gives the conservative approximation, rather than a single limit-stage principle.
+
+The connection between $\Sigma^1_1\text{-}\mathsf{TDC}_0$ and the existence of hyperations for WPO-dilators is attributed to Provenzano’s unpublished master’s thesis<Citation number="10" source="provenzano2022" />. Because this is not a public refereed source, it is treated here only as supplementary information.
+
+## Next steps
+
+- State the partial truth definitions and each $\omega$-model reflection principle over the base theory.
+- Formalize the fixed-point definition of $\mathsf{RFN}^D$ using coded praedilators.
+- Define the fundamental sequences of worms and the general maps $o_n$, then add a proof of the conservation spectrum theorem.
+- Complete the calculations for $\mathsf{ATR}_0^+$, $\Pi^1_l\text{-}\mathsf{BI}_0$, and relative leftmost path principles.
+- Identify theorem-level primary citations for the reflection characterizations of $\Sigma^1_1\text{-}\mathsf{DC}_0$ and $\mathsf{ATR}_0$.
+- Compare the resulting spectrum with Suzuki and Yokoyama’s analysis of the $\Pi^1_2$ consequences of $\Pi^1_1\text{-}\mathsf{CA}_0$<Citation number="12" source="suzuki-yokoyama2024" />.
+
+## References
+
+<ol className="reference-list">
+  <Reference id="beklemishev2004" number={1} href="https://doi.org/10.1016/j.apal.2003.11.030">
+    L. D. Beklemishev, “Provability algebras and proof-theoretic ordinals, I,” *Annals of Pure and Applied Logic* **128** (1–3), 103–123, 2004.
+  </Reference>
+  <Reference id="girard1981" number={2} href="https://doi.org/10.1016/0003-4843(81)90016-4">
+    J.-Y. Girard, “$\Pi^1_2$-logic, Part 1: Dilators,” *Annals of Mathematical Logic* **21** (2–3), 75–219, 1981.
+  </Reference>
+  <Reference id="simpson2009" number={3} href="https://doi.org/10.1017/CBO9780511581007" linkLabel="Book">
+    S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd ed., Perspectives in Logic, Cambridge University Press and Association for Symbolic Logic, 2009.
+  </Reference>
+  <Reference id="ignatiev1993" number={4} href="https://doi.org/10.2307/2275337">
+    K. N. Ignatiev, “On strong provability predicates and the associated modal logics,” *The Journal of Symbolic Logic* **58** (1), 249–290, 1993.
+  </Reference>
+  <Reference id="pakhomov2023" number={5} href="https://www.mathnet.ru/eng/present38367" linkLabel="Seminar record">
+    F. N. Pakhomov, “Dilators, Reflection, and Forcing: A Proof-Theoretic Analysis of $\Pi^1_1\text{-}\mathsf{CA}_0$,” Proof Theory / Logic Online Seminar, 20 March 2023 (lecture; unpublished).
+  </Reference>
+  <Reference id="freund2024" number={6} href="https://arxiv.org/abs/2406.13485" linkLabel="arXiv">
+    A. Freund, “Fraïssé’s conjecture, partial impredicativity and well-ordering principles, part I,” arXiv:2406.13485, 2024; *Proceedings of the American Mathematical Society* **153** (3), 937–946, 2025.
+  </Reference>
+  <Reference id="ruede2002" number={7} href="https://doi.org/10.2178/jsl/1190150155">
+    C. Rüede, “Transfinite dependent choice and $\omega$-model reflection,” *The Journal of Symbolic Logic* **67** (3), 1153–1168, 2002.
+  </Reference>
+  <Reference id="ruede2003" number={8} href="https://doi.org/10.1016/S0168-0072(03)00006-X">
+    C. Rüede, “The proof-theoretic analysis of $\Sigma^1_1$ transfinite dependent choice,” *Annals of Pure and Applied Logic* **122** (1–3), 195–234, 2003.
+  </Reference>
+  <Reference id="jager-strahm1999" number={9} href="https://doi.org/10.1016/S0168-0072(98)00056-6">
+    G. Jäger and T. Strahm, “Bar induction and $\omega$ model reflection,” *Annals of Pure and Applied Logic* **97** (1–3), 221–230, 1999.
+  </Reference>
+  <Reference id="provenzano2022" number={10}>
+    P. Provenzano, *The Reverse Mathematical Strength of Hyperations*, Master’s thesis, 2022 (unpublished).
+  </Reference>
+  <Reference id="suzuki2025" number={11} href="https://doi.org/10.1017/jsl.2025.10096">
+    Y. Suzuki, “Relative leftmost path principles and omega-model reflections of transfinite inductions,” *The Journal of Symbolic Logic*, First View, 1–15, published online 9 June 2025.
+  </Reference>
+  <Reference id="suzuki-yokoyama2024" number={12} href="https://arxiv.org/abs/2402.07136" linkLabel="arXiv">
+    Y. Suzuki and K. Yokoyama, “On the $\Pi^1_2$ consequences of $\Pi^1_1\text{-}\mathsf{CA}_0$,” *Journal of Mathematical Logic*, 2025; arXiv:2402.07136, revised 22 November 2024.
+  </Reference>
+</ol>
+
+<MathStatement kind="remark" title="Draft status">
+
+This page is a readable reconstruction of an active research draft. Definitions and established equivalences taken from external sources now carry numbered citations, separated from calculations made in this draft. Theorem 4.1 remains an unproved main result of the manuscript. A finished version should add theorem- or section-level locators for every input characterization and replace reliance on unpublished sources where possible.
+
+</MathStatement>

@@ -1,0 +1,135 @@
+---
+layout: ../../layouts/DraftLayout.astro
+title: 証明論的順序数の例
+description: 可述的体系から非可述的体系まで、証明論的順序数の代表例を出典と記法上の注意つきで整理する。
+---
+import MathStatement from '../../components/MathStatement.astro';
+
+<div class="post-meta"><span>Research note</span><time>2026.08.12</time></div>
+
+# 証明論的順序数の例
+
+このノートは、私が執筆した[「証明論的順序数の例」](https://googology.fandom.com/ja/wiki/証明論的順序数の例)をもとに、体系と順序数の対応を簡潔に引ける形へ再構成したものです。元記事の表では体系を一階算術・二階算術・集合論などに分けていますが、ここでは同じ順序数をもつ代表的な体系を一つの欄にまとめています。
+
+## 証明論的順序数とは
+
+<MathStatement kind="definition" number="1" title="証明論的順序数">
+
+$T$ を再帰的に公理化された $\Pi^1_1$-健全な体系とします。$T$ の証明論的順序数を、$T$ が整礎性を証明できる再帰的順序の順序型の上限
+
+$$
+|T|_{\Pi^1_1}
+=
+\sup\{\operatorname{otyp}(\prec) : \prec\text{ は再帰的であり }T\vdash\mathsf{WF}(\prec)\}
+$$
+
+によって定めます。
+
+</MathStatement>
+
+ただし、弱い算術体系では超限帰納法に許す論理式の複雑さ、順序表記のクラス、基礎理論などによって値の書き方が変わります。したがって、異なる文献の表を比較するときは、順序数だけでなく採用されている定義も確認する必要があります。
+
+<MathStatement kind="remark" title="表の読み方">
+
+以下は元記事で採用されている評価と記法の抜粋です。とくに EFA・PRA のような弱い体系では、制限されたクラスの超限帰納法を測る場合と、より一般的な「証明論的順序数」を測る場合とで異なる値が現れます。ここでは元記事の表を再現し、他の流儀と無条件に同一視しません。
+
+</MathStatement>
+
+## 記法
+
+- $\varphi$ はヴェブレン階層です。たとえば $\varepsilon_0=\varphi_1(0)$、$\Gamma_0=\varphi_{1,0}(0)$ と書きます。
+- $\vartheta$ はヴァイアーマン型の崩壊関数、$\psi$ はイェーガー–ブーフホルツ型の崩壊関数です。
+- $\Omega,\Omega_1,\mathbb I,M,K$ などは、崩壊関数を定義する際に使う非可算記号または大基数記号です。最終的な値はそれらを崩壊して得られる可算順序数です。
+- 文献によって $\vartheta$ と $\psi$ の定義は異なるため、見かけの式が異なっても同じ順序数を表すことがあります。
+
+<MathStatement kind="proposition" number="2" title="有限段階の極限">
+
+$\varphi_0(\alpha)=\omega^\alpha$ とすると、
+
+$$
+\sup_{n<\omega}\varphi_0^n(\omega)=\varepsilon_0
+$$
+
+が成り立ちます。
+
+</MathStatement>
+
+<MathStatement kind="proof">
+
+$\omega,\omega^\omega,\omega^{\omega^\omega},\ldots$ の上限を $\lambda$ とします。指数関数の連続性から $\omega^\lambda=\lambda$ です。また、$\omega$ より大きい任意のイプシロン数はこの列の全要素を上から押さえます。したがって $\lambda$ は最小のイプシロン数 $\varepsilon_0$ です。
+
+</MathStatement>
+
+## 可述的体系
+
+元記事では、証明論的順序数が $\Gamma_0$ 以下の体系を便宜上「可述的」と分類しています。
+
+| 代表的な体系 | 順序数 | 位置づけ・評価根拠 |
+| --- | --- | --- |
+| $\mathrm{EFA}$、$\mathrm{PRA}$ | $\omega^2$ | 元記事で採用した制限つき超限帰納法の評価。EFAについては厳密な証明を記した文献が未確認で、PRAに対するBeckmannの解析を修正して得られるという注記がある |
+| $I\Sigma^0_1$、$\mathsf{RCA}_0$、$\mathsf{WKL}_0$ | $\omega^\omega$ | $I\Sigma^0_1$ の解析を $\mathsf{RCA}_0$ に移し、$\mathsf{WKL}_0$ には $\mathsf{RCA}_0$ 上の $\Pi^1_1$-保存性を用いる |
+| $I\Sigma^0_n$ | $\varphi_0^n(\omega)$ | $n=1$ で $\omega^\omega$ となり、$\sup_{n<\omega}\varphi_0^n(\omega)=\varepsilon_0$ |
+| $\mathrm{PA}$、$\mathsf{ACA}_0$、$\Delta^1_1\text{-}\mathsf{CA}_0$、$\Sigma^1_1\text{-}\mathsf{AC}_0$ | $\varepsilon_0=\varphi_1(0)$ | 体系そのものが同値という意味ではなく、関連する保存定理や包含関係によって同じ証明論的順序数を得る |
+| $\mathsf{ACA}'_0$、$\mathsf{ACA}_0+\mathsf{iRT}$ | $\varphi_1(\omega)=\varepsilon_\omega$ | $\varphi_1$ はイプシロン数を枚挙するため、$\varphi_1(\omega)$ は最初の $\omega$ 個のイプシロン数の上限 |
+| $\mathsf{ACA}$ | $\varphi_1^2(0)=\varepsilon_{\varepsilon_0}$ | $\varphi_1^2(0)$ は反復 $\varphi_1(\varphi_1(0))$ の略記 |
+| $\mathsf{ACA}+\mathsf{BR}$、$\mathsf{ACA}_0^+$、$p_1(\mathsf{ACA}_0)$ | $\varphi_2(0)$ | $\varphi_2(0)$ は $\varphi_1$ の最初の固定点 |
+| $p_1(\mathsf{ACA}_0)+(\mathsf{IN})$ | $\varphi_2(\varphi_1(0))=\varphi_2(\varepsilon_0)$ | 直前の $\varphi_2(0)$ と同じヴェブレン階層を、添字 $\varepsilon_0$ まで進めた値 |
+| $\mathsf{ID}^{*\upharpoonright}_1$、$\Delta^1_1\text{-}\mathsf{CR}$、$\Sigma^1_1\text{-}\mathsf{DC}_0$ | $\varphi_\omega(0)$ | すべての有限段階 $\varphi_n$ に共通する最初の固定点 |
+| $\widehat{\mathsf{ID}}_1$、$\mathsf{SID}_1$、$\Delta^1_1\text{-}\mathsf{CA}$、$\Sigma^1_1\text{-}\mathsf{AC}$ | $\varphi_{\varphi_1(0)}(0)=\varphi_{\varepsilon_0}(0)$ | ヴェブレン階層の関数添字そのものを $\varepsilon_0$ まで進めた値 |
+| $\widehat{\mathsf{ID}}_n$ | $\Gamma_0[n+1]$ | 元記事の基本列では $\sup_{n<\omega}\Gamma_0[n+1]=\Gamma_0$ |
+| $\widehat{\mathsf{ID}}_{<\omega}$、$\mathsf{ATR}_0$、$\mathsf{FP}_0$ | $\Gamma_0=\varphi_{1,0}(0)$ | $\Gamma_0$ は最小の非零な解 $\alpha=\varphi_\alpha(0)$、すなわちフェファーマン–シュッテ順序数 |
+
+ここで $\Gamma_0[n]$ は元記事で用いられている $\Gamma_0$ への基本列の記法です。基本列の取り方を変える場合には、有限段階の表示も合わせて指定する必要があります。
+
+## 超可述的体系
+
+元記事では、$\Gamma_0$ を超えるものの、可述的順序数解析の手法を拡張して扱える体系を「超可述的」と呼んでいます。
+
+| 代表的な体系 | 順序数 | 記法上の位置づけ |
+| --- | --- | --- |
+| $\widehat{\mathsf{ID}}_\omega$、$\mathsf{ATR}$、$\mathsf{FP}$ | $\Gamma_{\varepsilon_0}=\varphi_{1,0}(\varphi_1(0))$ | $\varphi_1(0)=\varepsilon_0$ なので、$\Gamma$-数の枚挙を添字 $\varepsilon_0$ まで進めた段階 |
+| $\mathsf{ATR}_0^+$ | $\varphi_{1,1}(0)$ | 多変数ヴェブレン関数の記法であり、一変数の $\varphi_1(1)$ とは異なる |
+| $\mathsf{Aut}(\widehat{\mathsf{ID}})$、$\mathsf{FTR}_0$ | $\varphi_{2,0}(0)$ | 多変数ヴェブレン関数の値。一変数階層の $\varphi_2(0)$ と区別する |
+| $\Pi^1_2\text{-}\mathsf{REF}_0(\Sigma^1_1\text{-}\mathsf{DC})$、$\Sigma^1_1\text{-}\mathsf{TDC}_0$ | $\varphi_{\omega,0}(0)$ | 多変数ヴェブレン関数の第1添字を、有限段階の極限 $\omega$ まで進めた値 |
+| $\mathsf{TID}$、$\Pi^1_3\text{-}\mathsf{RFN}_0$、$\mathsf{FIT}$ | $\varphi_{(\omega,0)}=\vartheta(\Omega^\omega)$ | 同じ small Veblen ordinal を、有限列添字のヴェブレン記法と崩壊関数で表した等式 |
+| $\mathsf{ID}_1$、$\mathsf{TID}_{<\omega}$、$\Pi^1_1\text{-}\mathsf{CA}_0^-$、$\mathsf{KP}\omega$ | $\psi_{\Omega_1}(\varepsilon_{\Omega_1+1})=\vartheta(\varepsilon_{\Omega+1})$ | 同じ Bachmann–Howard ordinal に対するイェーガー–ブーフホルツ型とヴァイアーマン型の二つの表示 |
+
+最後の行が、以前の草稿で単に「Bachmann–Howard 型」と書いていた部分です。ここでは元記事に合わせて崩壊関数による表示まで明記しました。
+
+## 非可述的体系
+
+| 代表的な体系 | 順序数 |
+| --- | --- |
+| $\mathsf{ID}_{<\omega}$、$\Pi^1_1\text{-}\mathsf{CA}_0$、$\Delta^1_2\text{-}\mathsf{CA}_0$、$\Pi^1_0\text{-}\mathsf{Fix}$ | $\psi_{\Omega_1}(\Omega_\omega)$ |
+| $\Pi^1_1\text{-}\mathsf{CA}$、$\mathsf{W}\text{-}\mathsf{KPl}$ | $\psi_{\Omega_1}(\Omega_\omega\varepsilon_0)$ |
+| $\Pi^1_1\text{-}\mathsf{CA}+\Pi^0_1\text{-}\mathsf{BR}$ | $\psi_{\Omega_1}(\Omega_\omega\Omega_1)$ |
+| $\Pi^1_1\text{-}\mathsf{CA}+\mathsf{Bi}$、$\Pi^1_1\text{-}\mathsf{BI}$、$\mathsf{KPl}$ | $\psi_{\Omega_1}(\varepsilon_{\Omega_\omega+1})$ |
+| $\Delta^1_2\text{-}\mathsf{CR}$、$\Pi^1_2\text{-}\mathsf{SR}$、$\Pi^1_2\text{-}\mathsf{SR}+\Pi^1_1\text{-}\mathsf{BI}$ | $\psi_{\Omega_1}(\Omega_{\omega^\omega})$ |
+| $\Delta^1_2\text{-}\mathsf{CA}$、$\Pi^1_2\text{-}\mathsf{SP}$、$\Sigma^1_2\text{-}\mathsf{AC}$ | $\psi_{\Omega_1}(\Omega_{\varepsilon_0})$ |
+| $\Delta^1_2\text{-}\mathsf{CA}+\Pi^0_1\text{-}\mathsf{BR}$、$\Pi^1_2\text{-}\mathsf{SP}+\Pi^0_1\text{-}\mathsf{BR}$ | $\psi_{\Omega_1}(\Omega_{\Omega_1})$ |
+| $\Delta^1_2\text{-}\mathsf{CA}+\mathsf{Bi}$、$\Sigma^1_2\text{-}\mathsf{AC}+\mathsf{Bi}$、$\mathsf{KPi}$、$\mathsf{KP}\beta$ | $\psi_{\Omega_1}(\varepsilon_{\mathbb I+1})$ |
+
+以前の草稿では $\Pi^1_1\text{-}\mathsf{CA}_0$ を単に「Takeuti ordinal」としていましたが、元記事の表では $\psi_{\Omega_1}(\Omega_\omega)$ と評価されています。名称だけでは記法の流儀が分からないため、このノートでは式を優先します。
+
+## さらに強い体系
+
+この先では、単一の統一記法で比較することが難しくなります。元記事には再帰的マーロ順序数、反映順序数、安定順序数、$\Pi^1_2\text{-}\mathsf{CA}$ 周辺までの表があります。代表例だけ挙げると次の通りです。
+
+| 代表的な体系 | 大基数記号 | 順序数の一表示 |
+| --- | --- | --- |
+| $[\Pi^0_1,\Pi^0_1]\text{-}\mathsf{Fix}$、$\mathsf{MSA}$、$\mathsf{KPM}$ | 最小の弱マーロ基数 $M$ | $\psi_{\Omega_1}(\varepsilon_{M+1})$ |
+| $\Pi^0_2\text{-}\mathsf{Fix}$、$\mathsf{KP}\Pi_3$、$\mathsf{T}_3$ | 最小の弱コンパクト基数 $K$ | $\psi_{\Omega_1}(\varepsilon_{K+1})$ |
+| $\Pi^0_{n+2}\text{-}\mathsf{Fix}$、$\mathsf{KP}\Pi_{n+3}$、$\mathsf{T}_{n+3}$ | 最小の $\Pi^1_{n+1}$-記述不能基数 $K_{n+3}$ | $\psi_{\Omega_1}(\varepsilon_{K_{n+3}+1})$ |
+
+これらの大基数記号は、対象体系がその大基数の存在を仮定するという意味ではありません。順序数表記体系を外部で構成し、その可算部分を崩壊させるための記号です。また元記事にも、上限・下限の一方が未出版であるものや、証明に問題が指摘されている評価が明記されています。表の値を引用するときは、元記事の脚注と一次文献まで確認する必要があります。
+
+## 健全性に関する注意
+
+上の定義では、$T$ が $\Pi^1_1$-健全であることが本質的です。矛盾した体系、あるいは無矛盾でも $\Pi^1_1$-不健全な体系では、証明可能な「整礎性」に偽のものが混ざり、上限がチャーチ–クレイニ順序数 $\omega_1^{\mathrm{CK}}$ になりえます。その場合、順序数は通常期待する意味で体系の証明論的強さを測っていません。
+
+## 参考文献
+
+- 市川航士郎「[証明論的順序数の例](https://googology.fandom.com/ja/wiki/証明論的順序数の例)」— 本表の直接の出典。各評価の個別文献と未解決・未出版に関する注記を含む。
+- Stephen G. Simpson, [*Subsystems of Second Order Arithmetic*, 2nd ed.](https://www.cambridge.org/core/books/subsystems-of-second-order-arithmetic/EA16CB4305831530B7015D6BC46B7424), Cambridge University Press, 2009.
+- Wolfram Pohlers, [*Proof Theory: The First Step into Impredicativity*](https://link.springer.com/book/10.1007/978-3-540-69319-2), Springer, 2009.
+- Toshiyasu Arai, [*Ordinal Analysis with an Introduction to Proof Theory*](https://link.springer.com/book/10.1007/978-981-15-6459-8), Springer, 2020.

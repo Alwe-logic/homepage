@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import katex from 'katex';
+
+const pi12 = katex.renderToString('\\Pi^1_2', { throwOnError: false });
+const omega = katex.renderToString('\\omega', { throwOnError: false });
+const pi12LogicTalk = `${pi12}-logicの今昔（招待講演）`;
+// Add a YYYY-MM-DD `date` to each entry; lists are automatically sorted newest first.
+const preprints = [
+  { date: '2026-08-04', year: '2026.08.04', title: 'Normal Forms and Uniform Reflection under the Arithmetical Church Thesis', meta: 'Preprint', url: 'https://arxiv.org/abs/2608.03238' },
+  { title: 'Weihrauch Context of Well-Ordering Principles I: The Predicative Case', meta: 'Preprint' },
+];
+const papers = [];
+const presentations = [
+  { date: '2026-06-30', year: '2026.06.30', title: 'A Survey of Higher Proof Theory', meta: 'IMS Graduate Summer School in Logic 2026（Student Talk）', url: 'https://ims.nus.edu.sg/wp-content/uploads/2026/07/LogicSS-abs-v7.pdf' },
+  { date: '2026-06-21', year: '2026.06.21', title: '相対 Diers スペクトラムの構成', meta: '第1回小淵沢若手数学者勉強会', url: 'https://kobuchisawa-math-seminar.jp/en/past' },
+  { date: '2026-02-20', year: '2026.02.20', title: '算術の無矛盾性証明への統一的手法', meta: '第9回数理新人', url: 'https://sites.google.com/view/math-graduate/MATHSCI-FRESHMAN-SEMINAR/2026' },
+  { date: '2026-02-08', year: '2026.02.08', title: '一様Kruskalの定理と、整擬順序論に対する始代数の応用', meta: 'Categories in Tokyo 第2回集会', url: 'https://sites.google.com/view/categoriesintokyo/第2回集会' },
+  { date: '2025-12-22', year: '2025.12.22', title: 'Hyperations for Ptykes and the Bachmann–Howard Hierarchy', meta: 'RIMS共同研究「証明論と計算論の新地平」', url: 'https://sites.google.com/view/computability-2025/home' },
+  { date: '2025-12-21', year: '2025.12.21', title: '二階算術に於ける Kreisel–Lévy の本質的非有界性', meta: 'MLG 2025', url: 'https://www2.kobe-u.ac.jp/~tk/jp/workshop/MLG2025/' },
+  { date: '2025-10-30', year: '2025.10.30', titleHtml: pi12LogicTalk, meta: 'SLACS 2025', url: 'https://sites.google.com/view/slacs2025akita/home' },
+  { date: '2025-10-17', year: '2025.10.17', title: '一階算術と二階算術に於ける反映原理', meta: '数学基礎論若手の会', url: 'https://sites.google.com/view/mlwakatenokai2025/home' },
+  { date: '2025-09-08', year: '2025.09.08', title: 'A Modular Ordinal Analysis for Fragments of Induction Principles', meta: 'Asian Logic Conference 2025', url: 'https://www2.kobe-u.ac.jp/~brendle/alc2025/main.html' },
+  { date: '2025-09-04', year: '2025.09.04', title: 'A Modular Ordinal Analysis for Fragments of Induction Principles', meta: 'Proof Society 2025', url: 'https://proof2025.ugent.be/' },
+  { date: '2024-12-17', year: '2024.12.17', titleHtml: `Modular Ordinal Analysis via Iterated ${omega}-Model Reflection and Dilators`, meta: '証明論・計算論シンポジウム2024', url: 'https://sites.google.com/view/proof-theory-2024/home' },
+  { date: '2023-12-26', year: '2023.12.26–29', title: '可述的な体系の証明論', meta: 'Logic Winter School II（招待講演）', url: 'https://tenasaku.com/LWS-2/' },
+  { date: '2025-02-23', year: '2025.02.23', titleHtml: `${omega}-反映原理の成す様相論理`, meta: 'MLG 59', url: 'https://sites.google.com/view/mlg59/home' },
+];
+const newestFirst = (items) => [...items].sort((a, b) => {
+  if (!a.date && b.date) return -1;
+  if (a.date && !b.date) return 1;
+  return (b.date ?? '').localeCompare(a.date ?? '');
+});
+const outputGroups = [
+  { label: 'Preprints', items: newestFirst(preprints), emptyMessage: 'プレプリントはここに掲載します。' },
+  { label: 'Papers', items: newestFirst(papers), emptyMessage: '論文はここに掲載します。' },
+  { label: 'Presentations', items: newestFirst(presentations), emptyMessage: 'セミナー・学会発表はここに掲載します。' },
+];
+---
+<BaseLayout title="研究">
+  <section class="page-intro"><h1>研究</h1><p>形式体系を証明論の観点から研究しており、とりわけ <span set:html={pi12}></span>-logic に関心があります。</p></section>
+  <section class="section"><div class="section-heading"><h2>研究成果</h2></div><div class="output-grid">{outputGroups.map((group) => <section class="card output-card"><span class="index">{group.label.toUpperCase()}</span><h3>{group.label}</h3>{group.items.length > 0 ? <div class="paper-list">{group.items.map((item) => <article class="paper"><span class="paper-year">{item.year ?? 'Forthcoming'}</span><div>{item.titleHtml ? <h3 set:html={item.titleHtml}></h3> : <h3>{item.title}</h3>}<p>{item.meta}</p>{item.with && <p class="paper-with">with {item.with}</p>}{item.url && <a class="output-link" href={item.url} target="_blank" rel="noreferrer">詳細 ↗</a>}</div></article>)}</div> : <p class="muted">{group.emptyMessage}</p>}</section>)}</div></section>
+</BaseLayout>

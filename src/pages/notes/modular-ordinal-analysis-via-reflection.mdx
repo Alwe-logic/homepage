@@ -1,0 +1,408 @@
+---
+layout: ../../layouts/DraftLayout.astro
+title: 反映原理によるモジュラーな順序数解析
+description: Beklemishevの虫、dilator、ω-モデル反映原理を用いて保存性スペクトラムを記述する。
+---
+import MathStatement from '../../components/MathStatement.astro';
+import Citation from '../../components/Citation.astro';
+import Reference from '../../components/Reference.astro';
+
+<div class="post-meta"><span>Research note</span><time>2026.08.12</time></div>
+
+# 反映原理によるモジュラーな順序数解析
+
+このノートでは、Beklemishevの虫による反映原理の有限的な表示<Citation number="1" source="beklemishev2004" />と、Girardのdilator<Citation number="2" source="girard1981" />による反映原理の超限反復を組み合わせ、二階算術の体系に対する保存性スペクトラムを記述します。内容は研究原稿 *modular ordinal analysis via reflection* をウェブ向けに再構成した草稿です。
+
+基本理論として主に $\mathsf{ACA}_0$ を用います。二階算術の標準的な体系と $\omega$-モデルについては Simpson<Citation number="3" source="simpson2009" />に従います。$\Pi^1_k\text{-}\omega\mathsf{RFN}(T)$ は、理論 $T$ に対する複雑度 $\Pi^1_k$ の $\omega$-モデル反映原理を表します。
+
+## 1. 虫と順序数評価
+
+<MathStatement kind="definition" number="1.1" title="虫">
+
+$n\in\omega$ に対して、虫の集合 $\mathbb W_n$ を次のように帰納的に定めます。
+
+1. $\top\in\mathbb W_n$。
+2. $m\ge n$ かつ $w\in\mathbb W_n$ ならば、$\langle m\rangle w\in\mathbb W_n$。
+
+$\mathbb W_n$ 上の関係 $\prec_n$ を
+
+$$
+w\prec_n w'
+\quad\Longleftrightarrow\quad
+\mathsf{RC}\vdash w'\rightarrow\langle n\rangle w
+$$
+
+によって定めます。また $m\ge n$ に対して
+
+$$
+\langle m\rangle\mathbb W_n
+:=
+\{\langle m\rangle w:w\in\mathbb W_n\}\cup\{\top\}
+$$
+
+と書きます。
+
+</MathStatement>
+
+ここで $\mathsf{RC}$ は、モダリティ $\langle n\rangle$ の間の反映計算を記述する虫の計算体系です<Citation number="1" source="beklemishev2004" />。関係 $\equiv_{\mathsf{RC}}$ は $\mathsf{RC}$ における相互導出可能性を表します。
+
+<MathStatement kind="definition" number="1.2" title="評価">
+
+$o=o_0:\mathbb W_0\to\varepsilon_0$ を Cantor 標準形に沿って定めます。まず
+
+$$
+o(\langle0\rangle^k\top)=k.
+$$
+
+また $w\in\mathbb W_1$ に対する演算 $w\mapsto w^-$ を
+
+$$
+\top^-:=\top,
+\qquad
+(\langle m\rangle w)^-:=\langle m-1\rangle w^-
+\quad(m\ge1)
+$$
+
+と定めます。$w_0,\ldots,w_{k-1}\in\mathbb W_1$ に対して
+
+$$
+o(w_0\langle0\rangle w_1\langle0\rangle\cdots\langle0\rangle w_{k-1})
+=
+\omega^{o(w_{k-1}^-)}+\cdots+\omega^{o(w_0^-)}
+$$
+
+とします。一般の $o_n:\mathbb W_n\to\varepsilon_0$ はモダリティの添字を $n$ だけ下げることによって得られます。
+
+</MathStatement>
+
+<MathStatement kind="proposition" number="1.3" title="Ignatiev">
+
+$o_n:\mathbb W_n\to\varepsilon_0$ は全射かつ狭義順序保存であり、順序同型
+
+$$
+\mathbb W_n/{\equiv_{\mathsf{RC}}}\cong\varepsilon_0
+$$
+
+を誘導します。また Ignatiev 標準形 $w^{\mathsf{NF}}$ は各同値類の代表元を与えます<Citation number="4" source="ignatiev1993" />。
+
+</MathStatement>
+
+<MathStatement kind="definition" number="1.4" title="Ω-評価">
+
+基底変換 $S^\omega_\Omega:\varepsilon_0\to\mathsf{PDil}$ を
+
+$$
+S^\omega_\Omega(0)=0,
+$$
+
+$$
+S^\omega_\Omega
+(\omega^{\xi_{k-1}}+\cdots+\omega^{\xi_0})
+=
+\Omega^{S^\omega_\Omega(\xi_{k-1})}+\cdots+
+\Omega^{S^\omega_\Omega(\xi_0)}
+$$
+
+によって定めます。ここで $\Omega$ は恒等 praedilator です。さらに
+
+$$
+o_n^\Omega:=S^\omega_\Omega\circ o_n
+$$
+
+と定めます。通常の順序数評価における底 $\omega$ を、dilator の変数 $\Omega$ に置き換えたものと考えられます。dilatorそのものの定義と基本性質については Girard<Citation number="2" source="girard1981" />を参照してください。
+
+</MathStatement>
+
+## 2. 虫の反映原理による解釈
+
+<MathStatement kind="definition" number="2.1" title="ω-モデル反映原理による解釈">
+
+$T\supseteq\mathsf{ACA}_0$ を二階算術の理論とします。虫 $w\in\mathbb W_0$ の解釈 $(w)^{\omega\mathsf{RFN}}_T$ を
+
+$$
+(\top)^{\omega\mathsf{RFN}}_T:=\top,
+$$
+
+$$
+(\langle m\rangle w)^{\omega\mathsf{RFN}}_T
+:=
+\Pi^1_{m+2}\text{-}\omega\mathsf{RFN}
+\bigl(T+(w)^{\omega\mathsf{RFN}}_T\bigr)
+$$
+
+によって帰納的に定めます。したがって、モダリティ $\langle m\rangle$ は $\Pi^1_{m+2}$-$\omega$-モデル反映を一回適用する操作として読まれます。
+
+</MathStatement>
+
+この解釈により、虫の組合せ計算を反映原理の反復へ移すことができます。たとえば $\langle1\rangle\top$ は $\Pi^1_3$-$\omega$-モデル反映を、$\langle0\rangle\langle1\rangle\top$ はその上に $\Pi^1_2$-$\omega$-モデル反映を重ねたものを表します。
+
+## 3. dilatorによる反映原理の反復
+
+以下のdilatorに沿う反映原理の反復は、Pakhomovの講演で提示された構成<Citation number="5" source="pakhomov2023" />を、この研究原稿の記法に合わせて書き直したものです。現時点で参照できる資料は講演記録であるため、査読済み論文からの引用ではないことに注意してください。
+
+<MathStatement kind="definition" number="3.1" title="シフト">
+
+$\langle D;\operatorname{supp}^D\rangle$ を praedilator、$\mathcal A$ を線型順序とします。$\mathcal A$ によるシフト $D[\mathcal A]$ を
+
+$$
+D[\mathcal A](\mathcal X):=D(\mathcal A+\mathcal X),
+\qquad
+D[\mathcal A](f):=D(\operatorname{id}_{\mathcal A}+f)
+$$
+
+によって定め、台を
+
+$$
+\operatorname{supp}^{D[\mathcal A]}_{\mathcal X}(\sigma)
+:=
+\operatorname{supp}^D_{\mathcal A+\mathcal X}(\sigma)
+\mathbin{\upharpoonright}\mathcal X
+$$
+
+とします。
+
+</MathStatement>
+
+<MathStatement kind="proposition" number="3.2">
+
+$\mathsf{RCA}_0$ 上で、dilator を整列順序によってシフトしたものは再び dilator になります<Citation number="2" source="girard1981" />。
+
+</MathStatement>
+
+<MathStatement kind="definition" number="3.3" title="トレースと定数">
+
+praedilator $D$ のトレースを
+
+$$
+\operatorname{Tr}(D)
+:=
+\{(n,\sigma):n\in\omega,\ \sigma\in D(n),\ 
+\operatorname{supp}^D_n(\sigma)=n\}
+$$
+
+とします。$(0,\sigma)\in\operatorname{Tr}(D)$ となる元を $D$ の **定数** と呼び、その集合を $\operatorname{Tr}_0(D)$ と書きます。
+
+</MathStatement>
+
+<MathStatement kind="definition" number="3.4" title="定数による制限">
+
+$c\in\operatorname{Tr}_0(D)$ に対して、$D\mathbin{\upharpoonright}c$ を
+
+$$
+(D\mathbin{\upharpoonright}c)(\mathcal X)
+:=
+D(\mathcal X)\mathbin{\upharpoonright}c
+$$
+
+によって定めます。写像と台は $D$ のものをこの始切片へ制限して得ます。
+
+</MathStatement>
+
+<MathStatement kind="definition" number="3.5" title="dilatorによる反映原理の反復">
+
+$T$ を初等再帰的に公理化された理論、$\mathsf{RFN}$ を一つの論理式で表される反映原理とします。不動点定理を用いて $\mathsf{RFN}^D(T)$ を
+
+$$
+\begin{aligned}
+\mathsf{RCA}_0\vdash\quad
+\mathsf{RFN}^D(T)\ \longleftrightarrow\ 
+&\mathsf{PDil}(D)\ \land\\
+&(\forall\mathcal X)\Bigl[
+\mathsf{WO}(\mathcal X)\to
+(\forall c\in\operatorname{Tr}_0(D[\mathcal X]))\\
+&\hspace{4em}\mathsf{RFN}
+\bigl(T+\mathsf{RFN}^{D[\mathcal X]\upharpoonright c}(T)\bigr)
+\Bigr]
+\end{aligned}
+$$
+
+によって定めます。また
+
+$$
+\mathsf R^D(T)
+:=
+T+\{\mathsf{RFN}^{D[1]\upharpoonright c}(T):
+c\in\operatorname{Tr}_0(D[1])\}
+$$
+
+と置きます。
+
+</MathStatement>
+
+<MathStatement kind="remark" number="3.6" title="形式化について">
+
+この定義を基礎理論の内部で完全に形式化するには、coded praedilator を用いる必要があります<Citation number="6" source="freund2024" />。このノートでは保存性スペクトラムの構造を見やすくするため、符号化に関する技術的詳細を省略しています。
+
+</MathStatement>
+
+## 4. 保存性スペクトラム
+
+$\alpha\llbracket k\rrbracket$ で順序数 $\alpha$ の第 $k$ 基本列要素を表し、$U\equiv_\Gamma V$ で $U$ と $V$ がクラス $\Gamma$ の文について同じ帰結をもつことを表します。
+
+### 記号一覧
+
+| 記号 | 意味 |
+| --- | --- |
+| $\Pi^1_r\text{-}\omega\mathsf{RFN}(T)$ | $T$ に対する複雑度 $\Pi^1_r$ の $\omega$-モデル反映原理 |
+| $\Pi^1_r\text{-}\omega\mathsf{RFN}^{D}(T)$ | dilator $D$ に沿って反復した $\Pi^1_r$-$\omega$-モデル反映 |
+| $(w)^{\omega\mathsf{RFN}}_T$ | 虫 $w$ を、$T$ 上の反映原理の反復として解釈した文 |
+| $o_n(w)$ | 虫 $w\in\mathbb W_n$ の通常の順序数評価 |
+| $o_n^\Omega(w)=S^\omega_\Omega(o_n(w))$ | $\omega$ を dilator 変数 $\Omega$ に基底変換した評価 |
+| $U\equiv_\Gamma V$ | $U$ と $V$ がクラス $\Gamma$ の文について同じ帰結をもつこと |
+| $\alpha\llbracket k\rrbracket$ | $\alpha$ の第 $k$ 基本列要素 |
+
+次の定理は外部文献の定理をそのまま転載したものではなく、文献<Citation number="1" source="beklemishev2004" /><Citation number="5" source="pakhomov2023" />の枠組みを組み合わせた研究原稿中の主結果です。完全な証明はまだこのウェブ版に含めていません。
+
+<MathStatement kind="theorem" number="4.1" title="保存性スペクトラム定理">
+
+$n\in\omega$、$m\ge n$ とし、$T$ を $\mathsf{ACA}_0$ の初等再帰的に公理化可能な $\Pi^1_{n+2}$-拡大とします。
+
+1. $w\in\langle m\rangle\mathbb W_m$ ならば
+
+   $$
+   T+(w)^{\omega\mathsf{RFN}}_T
+   \equiv
+   T+\Pi^1_{m+2}\text{-}\omega\mathsf{RFN}^{\langle m\rangle o_m^\Omega(w)}(T).
+   $$
+
+2. $w\in\mathbb W_m\setminus\langle m\rangle\mathbb W_m$ ならば
+
+   $$
+   \begin{aligned}
+   T+(w)^{\omega\mathsf{RFN}}_T
+   \equiv_{\Pi^1_{m+2}}
+   T+\{&\Pi^1_{m+2}\text{-}\omega\mathsf{RFN}^{
+   S^\omega_\Omega(o_m(w)\llbracket k\rrbracket)}(T):\\
+   &k\in\omega\}.
+   \end{aligned}
+   $$
+
+</MathStatement>
+
+第1の場合には虫の評価から単一の dilator 反復が得られます。第2の場合には基本列に沿った反映原理の族が得られ、これが弱い論理式クラスに対する保存性スペクトラムを与えます。
+
+## 5. 計算例
+
+<MathStatement kind="example" number="5.1" title="Σ¹₁-従属選択">
+
+研究原稿では、次の反映原理による特徴付けを出発点として用います。
+
+$$
+\Sigma^1_1\text{-}\mathsf{DC}_0
+\equiv
+\mathsf{ACA}_0+(\langle1\rangle\top)^{\omega\mathsf{RFN}}_{\mathsf{ACA}_0}
+$$
+
+ここで $o_0(\langle1\rangle\top)=\omega$ であり、$\omega\llbracket k\rrbracket=k$ なので、
+
+$$
+\Sigma^1_1\text{-}\mathsf{DC}_0
+\equiv_{\Pi^1_2}
+\mathsf{ACA}_0+
+\{\Pi^1_2\text{-}\omega\mathsf{RFN}^{k}(\mathsf{ACA}_0):k\in\omega\}
+$$
+
+を得ます。
+
+</MathStatement>
+
+<MathStatement kind="example" number="5.2" title="算術的超限再帰">
+
+研究原稿で用いる反映原理による特徴付けのもとで、$\mathsf{ATR}_0$ は虫 $\langle0\rangle\langle1\rangle\top$ で表されます。その評価は $\omega+1$ で、$\langle0\rangle$-部分の Mostowski 崩壊と基底変換を施すと $\Omega$ になります。したがって
+
+$$
+\mathsf{ATR}_0
+\equiv
+\mathsf{ACA}_0+
+\Pi^1_2\text{-}\omega\mathsf{RFN}^{\Omega}(\mathsf{ACA}_0).
+$$
+
+これは
+
+$$
+\mathsf{ACA}_0+
+(\forall\xi)\bigl[
+\mathsf{WO}(\xi)\to
+\Pi^1_2\text{-}\omega\mathsf{RFN}^{\xi}(\mathsf{ACA}_0)
+\bigr]
+$$
+
+という表示に対応します。
+
+</MathStatement>
+
+<MathStatement kind="example" number="5.3" title="反映原理・虫・評価・スペクトラムの対応表">
+
+原稿中の計算を、基礎理論 $\mathsf{ACA}_0$ 上の反映原理による特徴付けを起点として整理すると、次のようになります。引用番号は各行の出発点となる既知の特徴付けに付けており、虫の評価と第4列は定理4.1を用いたこの草稿での計算です。
+
+| 体系 | 反映原理による特徴付け | 虫と評価 | 保存性スペクトラム／dilator反復 |
+| --- | --- | --- | --- |
+| $\Sigma^1_1\text{-}\mathsf{DC}_0$ | $\mathsf{ACA}_0+\Pi^1_3\text{-}\omega\mathsf{RFN}(\mathsf{ACA}_0)$ | $\langle1\rangle\top$<br />$o_0=\omega$ | $\mathsf{ACA}_0+\{\Pi^1_2\text{-}\omega\mathsf{RFN}^{k}(\mathsf{ACA}_0):k\in\omega\}$ |
+| $\mathsf{ATR}_0$ | $\mathsf{ACA}_0+\Pi^1_2\text{-}\omega\mathsf{RFN}(\mathsf{ACA}_0+\Pi^1_3\text{-}\omega\mathsf{RFN}(\mathsf{ACA}_0))$ | $\langle0\rangle\langle1\rangle\top$<br />$o_0=\omega+1$<br />$\langle0\rangle o_0^\Omega=\Omega$ | $\mathsf{ACA}_0+\Pi^1_2\text{-}\omega\mathsf{RFN}^{\Omega}(\mathsf{ACA}_0)$ |
+| $\mathsf{ATR}_0+(\Sigma^1_1\text{-}\mathsf{DC})$ | $\mathsf{ATR}_0+\Pi^1_3\text{-}\mathsf{RFN}(\mathsf{ATR}_0)$ | $\langle1\rangle\langle0\rangle\langle1\rangle\top$<br />$o_0=\omega+\omega$ | $\mathsf{ACA}_0+\{\Pi^1_2\text{-}\omega\mathsf{RFN}^{\Omega+k}(\mathsf{ACA}_0):k\in\omega\}$ |
+| $\mathsf{FTR}_0$ | $\mathsf{ACA}_0+\Pi^1_2\text{-}\omega\mathsf{RFN}(\mathsf{ATR}_0+(\Sigma^1_1\text{-}\mathsf{DC}))$<Citation number="7" source="ruede2002" /> | $\langle0\rangle\langle1\rangle\langle0\rangle\langle1\rangle\top$<br />$o_0=\omega+\omega+1$<br />$\langle0\rangle o_0^\Omega=\Omega+\Omega$ | $\mathsf{ACA}_0+\Pi^1_2\text{-}\omega\mathsf{RFN}^{\Omega+\Omega}(\mathsf{ACA}_0)$ |
+| $\Sigma^1_1\text{-}\mathsf{TDC}_0$ | $\mathsf{ACA}_0+\Pi^1_3\text{-}\omega\mathsf{RFN}(\Sigma^1_1\text{-}\mathsf{DC}_0)$<Citation number="8" source="ruede2003" /> | $\langle1\rangle\langle1\rangle\top$<br />$o_0=\omega^2$ | $\mathsf{ACA}_0+\{\Pi^1_2\text{-}\omega\mathsf{RFN}^{\Omega\cdot(k+1)+1}(\mathsf{ACA}_0):k\in\omega\}$ |
+| $\Pi^1_l\text{-}\mathsf{BI}_0$ $(l\ge1)$ | $\mathsf{ACA}_0+\Pi^1_{l+2}\text{-}\omega\mathsf{RFN}(\mathsf{ACA}_0)$<Citation number="9" source="jager-strahm1999" /> | $\langle l\rangle\top$<br />$o_m=\omega_{l-m}$ $(m<l)$ | $\mathsf{ACA}_0+\{\Pi^1_{m+2}\text{-}\omega\mathsf{RFN}^{\Omega_{l-m-1}(k+1)}(\mathsf{ACA}_0):k\in\omega\}$ |
+| $\Sigma^0_l\text{-}\mathsf{LPP}_0$ $(l\ge2)$ | $\mathsf{ACA}_0+\Pi^1_2\text{-}\omega\mathsf{RFN}(\Pi^1_{l+1}\text{-}\mathsf{BI}_0)$<Citation number="11" source="suzuki2025" /> | $\langle0\rangle\langle l+1\rangle\top$<br />$o_0=\omega_{l+1}+1$<br />$\langle0\rangle o_0^\Omega=\Omega_{l+1}$ | $\mathsf{ACA}_0+\Pi^1_2\text{-}\omega\mathsf{RFN}^{\Omega_{l+1}}(\mathsf{ACA}_0)$ |
+
+</MathStatement>
+
+この表の第4列は、体系そのものの完全な同値を述べる場合と、$\equiv_{\Pi^1_r}$ による保存性だけを述べる場合を区別して読む必要があります。波括弧で表した行は、単一の極限段階ではなく、基本列に沿う反映原理の族が保存的な近似を与える場合です。
+
+$\Sigma^1_1\text{-}\mathsf{TDC}_0$ とWPO-dilatorのhyperationの存在との関係については、Provenzanoの未公刊修士論文<Citation number="10" source="provenzano2022" />に依拠しています。この出典は公開された査読論文ではないため、本文では補足的な位置づけに留めています。
+
+## 今後の課題
+
+- 部分真理定義と各 $\omega$-モデル反映原理を基礎理論上で明示する。
+- coded praedilator を用いて $\mathsf{RFN}^D$ の不動点定義を完全に形式化する。
+- 虫の基本列と $o_n$ の一般の場合を定義し、保存性スペクトラム定理の証明を加える。
+- $\mathsf{ATR}_0^+$、$\Pi^1_l\text{-}\mathsf{BI}_0$、相対的 leftmost path principle の計算を整理する。
+- $\Sigma^1_1\text{-}\mathsf{DC}_0$ と $\mathsf{ATR}_0$ の反映原理による特徴付けについて、原典の定理番号まで特定して追記する。
+- $\Pi^1_1\text{-}\mathsf{CA}_0$ の $\Pi^1_2$ 帰結との関係を Suzuki–Yokoyama<Citation number="12" source="suzuki-yokoyama2024" />と照合する。
+
+## 参考文献
+
+<ol className="reference-list">
+  <Reference id="beklemishev2004" number={1} href="https://doi.org/10.1016/j.apal.2003.11.030">
+    L. D. Beklemishev, “Provability algebras and proof-theoretic ordinals, I,” *Annals of Pure and Applied Logic* **128** (1–3), 103–123, 2004.
+  </Reference>
+  <Reference id="girard1981" number={2} href="https://doi.org/10.1016/0003-4843(81)90016-4">
+    J.-Y. Girard, “$\Pi^1_2$-logic, Part 1: Dilators,” *Annals of Mathematical Logic* **21** (2–3), 75–219, 1981.
+  </Reference>
+  <Reference id="simpson2009" number={3} href="https://doi.org/10.1017/CBO9780511581007" linkLabel="Book">
+    S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd ed., Perspectives in Logic, Cambridge University Press and Association for Symbolic Logic, 2009.
+  </Reference>
+  <Reference id="ignatiev1993" number={4} href="https://doi.org/10.2307/2275337">
+    K. N. Ignatiev, “On strong provability predicates and the associated modal logics,” *The Journal of Symbolic Logic* **58** (1), 249–290, 1993.
+  </Reference>
+  <Reference id="pakhomov2023" number={5} href="https://www.mathnet.ru/eng/present38367" linkLabel="講演記録">
+    F. N. Pakhomov, “Dilators, Reflection, and Forcing: A Proof-Theoretic Analysis of $\Pi^1_1\text{-}\mathsf{CA}_0$,” Proof Theory / Logic Online Seminar, 20 March 2023（講演、未公刊）。
+  </Reference>
+  <Reference id="freund2024" number={6} href="https://arxiv.org/abs/2406.13485" linkLabel="arXiv">
+    A. Freund, “Fraïssé’s conjecture, partial impredicativity and well-ordering principles, part I,” arXiv:2406.13485, 2024; *Proceedings of the American Mathematical Society* **153** (3), 937–946, 2025.
+  </Reference>
+  <Reference id="ruede2002" number={7} href="https://doi.org/10.2178/jsl/1190150155">
+    C. Rüede, “Transfinite dependent choice and $\omega$-model reflection,” *The Journal of Symbolic Logic* **67** (3), 1153–1168, 2002.
+  </Reference>
+  <Reference id="ruede2003" number={8} href="https://doi.org/10.1016/S0168-0072(03)00006-X">
+    C. Rüede, “The proof-theoretic analysis of $\Sigma^1_1$ transfinite dependent choice,” *Annals of Pure and Applied Logic* **122** (1–3), 195–234, 2003.
+  </Reference>
+  <Reference id="jager-strahm1999" number={9} href="https://doi.org/10.1016/S0168-0072(98)00056-6">
+    G. Jäger and T. Strahm, “Bar induction and $\omega$ model reflection,” *Annals of Pure and Applied Logic* **97** (1–3), 221–230, 1999.
+  </Reference>
+  <Reference id="provenzano2022" number={10}>
+    P. Provenzano, *The Reverse Mathematical Strength of Hyperations*, Master’s thesis, 2022（未公刊）。
+  </Reference>
+  <Reference id="suzuki2025" number={11} href="https://doi.org/10.1017/jsl.2025.10096">
+    Y. Suzuki, “Relative leftmost path principles and omega-model reflections of transfinite inductions,” *The Journal of Symbolic Logic*, First View, 1–15, published online 9 June 2025.
+  </Reference>
+  <Reference id="suzuki-yokoyama2024" number={12} href="https://arxiv.org/abs/2402.07136" linkLabel="arXiv">
+    Y. Suzuki and K. Yokoyama, “On the $\Pi^1_2$ consequences of $\Pi^1_1\text{-}\mathsf{CA}_0$,” *Journal of Mathematical Logic*, 2025; arXiv:2402.07136, revised 22 November 2024.
+  </Reference>
+</ol>
+
+<MathStatement kind="remark" title="草稿について">
+
+このページは研究原稿を読みやすく再構成した草稿です。外部文献に由来する定義・既知の同値性には引用番号を付け、この草稿での計算とは区別しました。定理4.1は未証明の研究原稿中の主結果です。完成稿では、各出発点について定理番号または節番号まで確認し、未公刊資料に依存する箇所を公開文献で置き換えます。
+
+</MathStatement>

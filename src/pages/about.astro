@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import katex from 'katex';
+
+const pi12 = katex.renderToString('\\Pi^1_2', { throwOnError: false });
+---
+<BaseLayout title="About" description="市川航士郎の研究者ホームページ。証明論と計算可能性理論に関する研究ノート。">
+  <section class="page-intro"><h1>自己紹介</h1><p>市川航士郎（Ichikawa Koshiro）と申します。名古屋大学大学院情報学研究科の修士2年生として、<a href="https://www.math.mi.i.nagoya-u.ac.jp/~kihara/index-j.html" target="_blank" rel="noreferrer">木原貴行教授</a>の指導のもと、証明論と計算可能性理論を学んでいます。</p></section>
+  <section class="content-grid">
+    <aside class="sidebar-note"><strong>所属</strong>修士2年<br />名古屋大学大学院<br />情報学研究科<br /><br /><strong>指導教員</strong><a href="https://www.math.mi.i.nagoya-u.ac.jp/~kihara/index-j.html" target="_blank" rel="noreferrer">木原貴行</a></aside>
+    <div class="prose"><h2>研究について</h2><p>形式的な証明そのものや、理論の強さを順序数などの不変量を用いて理解する順序数解析に興味があります。現在は、反映原理の諸変種と、dilators・ptykes などの高次の証明論的不変量との関係を考えています。</p><h2>Research interests</h2><ul><li>証明論、特に順序数解析</li><li>反映原理</li><li><span set:html={pi12}></span>-logic（dilators と ptykes を含む）</li></ul><h2>学歴</h2><p>2025年3月に東京理科大学理学部第二部数学科を卒業し、同年4月から名古屋大学大学院情報学研究科に在籍しています。</p><h2>所属</h2><p>名古屋大学大学院情報学研究科の修士2年生です。<a href="https://www.math.mi.i.nagoya-u.ac.jp/~kihara/index-j.html" target="_blank" rel="noreferrer">木原貴行教授</a>の指導のもと研究しています。</p><h2>その他</h2><p>読書やカフェ巡り、クラリネットの演奏を楽しんでいます。</p></div>
+  </section>
+</BaseLayout>

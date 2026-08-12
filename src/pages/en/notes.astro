@@ -1,0 +1,6 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { notesEn as notes } from '../../data/notes.js';
+const publishedNotes = notes.filter((note) => note.published !== false);
+---
+<BaseLayout title="Notes"><section class="page-intro"><h1>Notes</h1><p>Short writing on research, reading, and everyday life. These are informal and may change over time.</p></section><section class="section"><div class="notes-list">{publishedNotes.length > 0 ? publishedNotes.map((note) => <article class="note-item"><div class="note-meta"><time class="note-date">{note.date}</time><span class="note-category">{note.category}</span></div><div><h3>{note.href ? <a href={note.href}>{note.title}</a> : note.title}</h3><p>{note.excerpt}</p><div class="note-tags">{note.tags.map((tag) => <a class="note-tag" href={`/en/notes/tag/${tag.slug}/`}>#{tag.label}</a>)}</div></div></article>) : <p class="muted">No notes are currently published.</p>}</div></section></BaseLayout>

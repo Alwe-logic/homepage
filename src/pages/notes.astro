@@ -1,0 +1,6 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { notesJa as notes } from '../data/notes.js';
+const publishedNotes = notes.filter((note) => note.published !== false);
+---
+<BaseLayout title="ノート"><section class="page-intro"><h1>研究ノート</h1><p>研究、読書、日々の生活についての短い文章を記録しています。</p></section><section class="section"><div class="notes-list">{publishedNotes.length > 0 ? publishedNotes.map((note) => <article class="note-item"><div class="note-meta"><time class="note-date">{note.date}</time><span class="note-category">{note.category}</span></div><div><h3>{note.href ? <a href={note.href}>{note.title}</a> : note.title}</h3><p>{note.excerpt}</p><div class="note-tags">{note.tags.map((tag) => <a class="note-tag" href={`/notes/tag/${tag.slug}/`}>#{tag.label}</a>)}</div></div></article>) : <p class="muted">現在公開中のノートはありません。</p>}</div></section></BaseLayout>

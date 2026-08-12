@@ -1,0 +1,22 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+const { title, description } = Astro.props;
+const redirectPath = Astro.currentLocale === 'en' ? '/en/notes/' : '/notes/';
+const isProduction = import.meta.env.PROD;
+---
+
+{isProduction ? (
+  <html lang={Astro.currentLocale === 'en' ? 'en' : 'ja'}>
+    <head>
+      <meta http-equiv="refresh" content={`0;url=${redirectPath}`} />
+      <meta name="robots" content="noindex" />
+      <title>Redirecting…</title>
+    </head>
+    <body><p><a href={redirectPath}>Notes</a></p></body>
+  </html>
+) : (
+  <BaseLayout title={title} description={description}>
+    <slot />
+  </BaseLayout>
+)}

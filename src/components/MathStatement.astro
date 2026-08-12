@@ -1,0 +1,54 @@
+---
+type Kind = 'definition' | 'theorem' | 'proposition' | 'lemma' | 'corollary' | 'remark' | 'example' | 'conjecture' | 'problem' | 'exercise' | 'claim' | 'proof';
+
+interface Props {
+  kind?: Kind;
+  number?: string | number;
+  title?: string;
+}
+
+const { kind = 'theorem', number, title } = Astro.props;
+const isEnglish = Astro.currentLocale === 'en';
+const labels: Record<'ja' | 'en', Record<Kind, string>> = {
+  ja: {
+    definition: '定義',
+    theorem: '定理',
+    proposition: '命題',
+    lemma: '補題',
+    corollary: '系',
+    remark: '注意',
+    example: '例',
+    conjecture: '予想',
+    problem: '問題',
+    exercise: '演習問題',
+    claim: '主張',
+    proof: '証明',
+  },
+  en: {
+    definition: 'Definition',
+    theorem: 'Theorem',
+    proposition: 'Proposition',
+    lemma: 'Lemma',
+    corollary: 'Corollary',
+    remark: 'Remark',
+    example: 'Example',
+    conjecture: 'Conjecture',
+    problem: 'Problem',
+    exercise: 'Exercise',
+    claim: 'Claim',
+    proof: 'Proof',
+  },
+};
+const label = labels[isEnglish ? 'en' : 'ja'][kind];
+const heading = `${label}${number !== undefined ? ` ${number}` : ''}${title ? ` ${title}` : ''}`;
+---
+
+<aside class:list={['math-statement', `math-statement--${kind}`]} aria-label={heading}>
+  <div class="math-statement__heading">
+    <span class="math-statement__label">{label}{number !== undefined && ` ${number}`}</span>
+    {title && <span class="math-statement__title">{isEnglish ? `(${title})` : `（${title}）`}</span>}
+  </div>
+  <div class="math-statement__body">
+    <slot />
+  </div>
+</aside>

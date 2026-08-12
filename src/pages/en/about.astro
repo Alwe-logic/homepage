@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import katex from 'katex';
+
+const pi12 = katex.renderToString('\\Pi^1_2', { throwOnError: false });
+---
+<BaseLayout title="About">
+  <section class="page-intro"><h1>About me</h1><p>I am 市川航士郎 (Ichikawa Koshiro), a second-year master's student in the Graduate School of Informatics at Nagoya University. Under the supervision of <a href="https://www.math.mi.i.nagoya-u.ac.jp/~kihara/index-j.html" target="_blank" rel="noreferrer">Takayuki Kihara</a>, I study proof theory and computability theory.</p></section>
+  <section class="content-grid"><aside class="sidebar-note"><strong>At a glance</strong>Master's student (M2)<br />Graduate School of Informatics<br />Nagoya University<br /><br /><strong>Supervisor</strong><a href="https://www.math.mi.i.nagoya-u.ac.jp/~kihara/index-j.html" target="_blank" rel="noreferrer">Takayuki Kihara</a></aside><div class="prose"><h2>Research</h2><p>My interests include formal proofs themselves and ordinal analysis, which uses invariants such as ordinals to understand the strength of theories. I am currently studying the relationship between variations of reflection principles and higher proof-theoretic invariants, including dilators and ptykes.</p><h2>Research interests</h2><ul><li>Proof theory, especially ordinal analysis</li><li>Reflection principles</li><li><span set:html={pi12}></span>-logic, including dilators and ptykes</li></ul><h2>Education</h2><p>I received a Bachelor of Mathematics from the Faculty of Science Division II at the Tokyo University of Science in March 2025. Since April 2025, I have been enrolled in the Graduate School of Informatics at Nagoya University.</p><h2>Affiliation</h2><p>I am enrolled in the Graduate School of Informatics at Nagoya University as a second-year master's student. My research is supervised by <a href="https://www.math.mi.i.nagoya-u.ac.jp/~kihara/index-j.html" target="_blank" rel="noreferrer">Takayuki Kihara</a>.</p><h2>Beyond research</h2><p>Outside research, I enjoy reading, visiting cafés, and playing the clarinet.</p></div></section>
+</BaseLayout>

@@ -1,0 +1,131 @@
+---
+layout: ../../../layouts/DraftLayout.astro
+title: Examples of Proof-Theoretic Ordinals
+description: A source-based table of representative proof-theoretic ordinals, from predicative to impredicative theories.
+---
+import MathStatement from '../../../components/MathStatement.astro';
+
+<div class="post-meta"><span>Research note</span><time>2026.08.12</time></div>
+
+# Examples of Proof-Theoretic Ordinals
+
+This note reorganizes my article [“Examples of Proof-Theoretic Ordinals”](https://googology.fandom.com/ja/wiki/証明論的順序数の例) into a compact reference table. The source article separates first-order arithmetic, second-order arithmetic, set theory, and other frameworks; here, representative theories assigned the same ordinal are collected in one column.
+
+## Definition
+
+<MathStatement kind="definition" number="1" title="Proof-theoretic ordinal">
+
+Let $T$ be a recursively axiomatized, $\Pi^1_1$-sound theory. Define its proof-theoretic ordinal by
+
+$$
+|T|_{\Pi^1_1}
+=
+\sup\{\operatorname{otyp}(\prec) : \prec\text{ is recursive and }T\vdash\mathsf{WF}(\prec)\}.
+$$
+
+</MathStatement>
+
+For weak arithmetical theories, however, the displayed value can depend on the complexity of formulas allowed in transfinite induction, the class of ordinal notations, and the base theory. Ordinals taken from different references should therefore be compared only after their underlying definitions have been checked.
+
+<MathStatement kind="remark" title="How to read the tables">
+
+The values below reproduce the calibration and notation used in the source article. For weak theories such as EFA and PRA, restricted transfinite-induction measures and broader notions of proof-theoretic ordinal may give different values. The first row should therefore not be transferred to another convention without qualification.
+
+</MathStatement>
+
+## Notation
+
+- $\varphi$ denotes the Veblen hierarchy; in particular, $\varepsilon_0=\varphi_1(0)$ and $\Gamma_0=\varphi_{1,0}(0)$.
+- $\vartheta$ denotes a Weiermann-style collapsing function, while $\psi$ denotes a Jäger–Buchholz-style collapsing function.
+- Symbols such as $\Omega,\Omega_1,\mathbb I,M$, and $K$ are formal uncountable or large-cardinal parameters used to define collapsing functions. The resulting proof-theoretic ordinals are countable.
+- Definitions of $\vartheta$ and $\psi$ vary between sources, so different-looking terms may denote the same ordinal.
+
+<MathStatement kind="proposition" number="2" title="Limit of the finite stages">
+
+If $\varphi_0(\alpha)=\omega^\alpha$, then
+
+$$
+\sup_{n<\omega}\varphi_0^n(\omega)=\varepsilon_0.
+$$
+
+</MathStatement>
+
+<MathStatement kind="proof">
+
+Let $\lambda$ be the supremum of $\omega,\omega^\omega,\omega^{\omega^\omega},\ldots$. Continuity of exponentiation gives $\omega^\lambda=\lambda$. Every epsilon number above $\omega$ bounds the entire sequence, so $\lambda$ is the least epsilon number $\varepsilon_0$.
+
+</MathStatement>
+
+## Predicative systems
+
+The source article uses “predicative” as a convenient label for systems whose proof-theoretic ordinal is at most $\Gamma_0$.
+
+| Representative theories | Ordinal | Position or justification |
+| --- | --- | --- |
+| $\mathrm{EFA}$, $\mathrm{PRA}$ | $\omega^2$ | The restricted transfinite-induction calibration used in the source. Its footnote says that a fully written proof for EFA has not been located and that the result follows by modifying Beckmann’s analysis of PRA |
+| $I\Sigma^0_1$, $\mathsf{RCA}_0$, $\mathsf{WKL}_0$ | $\omega^\omega$ | Transfer the analysis of $I\Sigma^0_1$ to $\mathsf{RCA}_0$, then use the $\Pi^1_1$-conservativity of $\mathsf{WKL}_0$ over $\mathsf{RCA}_0$ |
+| $I\Sigma^0_n$ | $\varphi_0^n(\omega)$ | At $n=1$ this is $\omega^\omega$, and $\sup_{n<\omega}\varphi_0^n(\omega)=\varepsilon_0$ |
+| $\mathrm{PA}$, $\mathsf{ACA}_0$, $\Delta^1_1\text{-}\mathsf{CA}_0$, $\Sigma^1_1\text{-}\mathsf{AC}_0$ | $\varepsilon_0=\varphi_1(0)$ | The theories are not identical; relevant conservation and inclusion results yield the same proof-theoretic ordinal |
+| $\mathsf{ACA}'_0$, $\mathsf{ACA}_0+\mathsf{iRT}$ | $\varphi_1(\omega)=\varepsilon_\omega$ | Since $\varphi_1$ enumerates the epsilon numbers, this is the supremum of the first $\omega$ epsilon numbers |
+| $\mathsf{ACA}$ | $\varphi_1^2(0)=\varepsilon_{\varepsilon_0}$ | Here $\varphi_1^2(0)$ abbreviates the iterate $\varphi_1(\varphi_1(0))$ |
+| $\mathsf{ACA}+\mathsf{BR}$, $\mathsf{ACA}_0^+$, $p_1(\mathsf{ACA}_0)$ | $\varphi_2(0)$ | This is the first fixed point of $\varphi_1$ |
+| $p_1(\mathsf{ACA}_0)+(\mathsf{IN})$ | $\varphi_2(\varphi_1(0))=\varphi_2(\varepsilon_0)$ | The same Veblen level as the preceding row, now evaluated at index $\varepsilon_0$ |
+| $\mathsf{ID}^{*\upharpoonright}_1$, $\Delta^1_1\text{-}\mathsf{CR}$, $\Sigma^1_1\text{-}\mathsf{DC}_0$ | $\varphi_\omega(0)$ | The first common fixed point of all finite Veblen functions $\varphi_n$ |
+| $\widehat{\mathsf{ID}}_1$, $\mathsf{SID}_1$, $\Delta^1_1\text{-}\mathsf{CA}$, $\Sigma^1_1\text{-}\mathsf{AC}$ | $\varphi_{\varphi_1(0)}(0)=\varphi_{\varepsilon_0}(0)$ | The function index in the Veblen hierarchy itself has reached $\varepsilon_0$ |
+| $\widehat{\mathsf{ID}}_n$ | $\Gamma_0[n+1]$ | For the fundamental sequence used in the source, $\sup_{n<\omega}\Gamma_0[n+1]=\Gamma_0$ |
+| $\widehat{\mathsf{ID}}_{<\omega}$, $\mathsf{ATR}_0$, $\mathsf{FP}_0$ | $\Gamma_0=\varphi_{1,0}(0)$ | $\Gamma_0$ is the least nonzero solution of $\alpha=\varphi_\alpha(0)$, the Feferman–Schütte ordinal |
+
+Here $\Gamma_0[n]$ is the fundamental-sequence notation used in the source article. If a different fundamental sequence is chosen, its finite-stage notation must also be specified.
+
+## Metapredicative systems
+
+The source calls systems above $\Gamma_0$ “metapredicative” when their analyses extend methods used for predicative systems.
+
+| Representative theories | Ordinal | Notational position |
+| --- | --- | --- |
+| $\widehat{\mathsf{ID}}_\omega$, $\mathsf{ATR}$, $\mathsf{FP}$ | $\Gamma_{\varepsilon_0}=\varphi_{1,0}(\varphi_1(0))$ | Since $\varphi_1(0)=\varepsilon_0$, the enumeration of gamma numbers has reached index $\varepsilon_0$ |
+| $\mathsf{ATR}_0^+$ | $\varphi_{1,1}(0)$ | Multivariate Veblen notation; this is not the one-variable value $\varphi_1(1)$ |
+| $\mathsf{Aut}(\widehat{\mathsf{ID}})$, $\mathsf{FTR}_0$ | $\varphi_{2,0}(0)$ | A multivariate Veblen value, distinct from the one-variable $\varphi_2(0)$ |
+| $\Pi^1_2\text{-}\mathsf{REF}_0(\Sigma^1_1\text{-}\mathsf{DC})$, $\Sigma^1_1\text{-}\mathsf{TDC}_0$ | $\varphi_{\omega,0}(0)$ | The first index of the multivariate Veblen function has reached the limit $\omega$ of its finite stages |
+| $\mathsf{TID}$, $\Pi^1_3\text{-}\mathsf{RFN}_0$, $\mathsf{FIT}$ | $\varphi_{(\omega,0)}=\vartheta(\Omega^\omega)$ | Two presentations of the same small Veblen ordinal: finite-sequence Veblen notation and a collapsing function |
+| $\mathsf{ID}_1$, $\mathsf{TID}_{<\omega}$, $\Pi^1_1\text{-}\mathsf{CA}_0^-$, $\mathsf{KP}\omega$ | $\psi_{\Omega_1}(\varepsilon_{\Omega_1+1})=\vartheta(\varepsilon_{\Omega+1})$ | Jäger–Buchholz-style and Weiermann-style presentations of the same Bachmann–Howard ordinal |
+
+The last row replaces the draft’s imprecise phrase “Bachmann–Howard-type ordinal” with the collapsing-function notation used by the source.
+
+## Impredicative systems
+
+| Representative theories | Ordinal |
+| --- | --- |
+| $\mathsf{ID}_{<\omega}$, $\Pi^1_1\text{-}\mathsf{CA}_0$, $\Delta^1_2\text{-}\mathsf{CA}_0$, $\Pi^1_0\text{-}\mathsf{Fix}$ | $\psi_{\Omega_1}(\Omega_\omega)$ |
+| $\Pi^1_1\text{-}\mathsf{CA}$, $\mathsf{W}\text{-}\mathsf{KPl}$ | $\psi_{\Omega_1}(\Omega_\omega\varepsilon_0)$ |
+| $\Pi^1_1\text{-}\mathsf{CA}+\Pi^0_1\text{-}\mathsf{BR}$ | $\psi_{\Omega_1}(\Omega_\omega\Omega_1)$ |
+| $\Pi^1_1\text{-}\mathsf{CA}+\mathsf{Bi}$, $\Pi^1_1\text{-}\mathsf{BI}$, $\mathsf{KPl}$ | $\psi_{\Omega_1}(\varepsilon_{\Omega_\omega+1})$ |
+| $\Delta^1_2\text{-}\mathsf{CR}$, $\Pi^1_2\text{-}\mathsf{SR}$, $\Pi^1_2\text{-}\mathsf{SR}+\Pi^1_1\text{-}\mathsf{BI}$ | $\psi_{\Omega_1}(\Omega_{\omega^\omega})$ |
+| $\Delta^1_2\text{-}\mathsf{CA}$, $\Pi^1_2\text{-}\mathsf{SP}$, $\Sigma^1_2\text{-}\mathsf{AC}$ | $\psi_{\Omega_1}(\Omega_{\varepsilon_0})$ |
+| $\Delta^1_2\text{-}\mathsf{CA}+\Pi^0_1\text{-}\mathsf{BR}$, $\Pi^1_2\text{-}\mathsf{SP}+\Pi^0_1\text{-}\mathsf{BR}$ | $\psi_{\Omega_1}(\Omega_{\Omega_1})$ |
+| $\Delta^1_2\text{-}\mathsf{CA}+\mathsf{Bi}$, $\Sigma^1_2\text{-}\mathsf{AC}+\mathsf{Bi}$, $\mathsf{KPi}$, $\mathsf{KP}\beta$ | $\psi_{\Omega_1}(\varepsilon_{\mathbb I+1})$ |
+
+The earlier draft described $\Pi^1_1\text{-}\mathsf{CA}_0$ only as having the “Takeuti ordinal.” The source instead gives $\psi_{\Omega_1}(\Omega_\omega)$. Because a name alone does not identify the convention for ordinal notation, this note gives the term explicitly.
+
+## Stronger systems
+
+Beyond this point, comparisons become difficult to state in one uniform notation. The source article continues through recursively Mahlo ordinals, reflection ordinals, stable ordinals, and systems around $\Pi^1_2\text{-}\mathsf{CA}$. Three representative rows are:
+
+| Representative theories | Large-cardinal parameter | One notation for the ordinal |
+| --- | --- | --- |
+| $[\Pi^0_1,\Pi^0_1]\text{-}\mathsf{Fix}$, $\mathsf{MSA}$, $\mathsf{KPM}$ | the least weakly Mahlo cardinal $M$ | $\psi_{\Omega_1}(\varepsilon_{M+1})$ |
+| $\Pi^0_2\text{-}\mathsf{Fix}$, $\mathsf{KP}\Pi_3$, $\mathsf{T}_3$ | the least weakly compact cardinal $K$ | $\psi_{\Omega_1}(\varepsilon_{K+1})$ |
+| $\Pi^0_{n+2}\text{-}\mathsf{Fix}$, $\mathsf{KP}\Pi_{n+3}$, $\mathsf{T}_{n+3}$ | the least $\Pi^1_{n+1}$-indescribable cardinal $K_{n+3}$ | $\psi_{\Omega_1}(\varepsilon_{K_{n+3}+1})$ |
+
+These parameters do not mean that the analyzed theories assume the corresponding large cardinals. They are external symbols used to construct an ordinal notation system, whose relevant part is then collapsed to a countable ordinal. The source also flags results for which a lower or upper bound remains unpublished, or for which a proof has been criticized. Its footnotes and the primary literature must therefore be checked before citing an individual value.
+
+## A note on soundness
+
+The assumption that $T$ is $\Pi^1_1$-sound is essential. If $T$ is inconsistent—or consistent but $\Pi^1_1$-unsound—false well-foundedness statements may be provable, and the supremum can become the Church–Kleene ordinal $\omega_1^{\mathrm{CK}}$. In that case the ordinal no longer measures the theory’s strength in the intended sense.
+
+## References
+
+- Koshiro Ichikawa, [“Examples of Proof-Theoretic Ordinals”](https://googology.fandom.com/ja/wiki/証明論的順序数の例) (in Japanese). This is the direct source for the tables and contains references and qualifications for individual entries.
+- Stephen G. Simpson, [*Subsystems of Second Order Arithmetic*, 2nd ed.](https://www.cambridge.org/core/books/subsystems-of-second-order-arithmetic/EA16CB4305831530B7015D6BC46B7424), Cambridge University Press, 2009.
+- Wolfram Pohlers, [*Proof Theory: The First Step into Impredicativity*](https://link.springer.com/book/10.1007/978-3-540-69319-2), Springer, 2009.
+- Toshiyasu Arai, [*Ordinal Analysis with an Introduction to Proof Theory*](https://link.springer.com/book/10.1007/978-981-15-6459-8), Springer, 2020.

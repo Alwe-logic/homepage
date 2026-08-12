@@ -1,0 +1,59 @@
+---
+import 'katex/dist/katex.min.css';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title: directTitle, description: directDescription, frontmatter } = Astro.props;
+const title = directTitle ?? frontmatter?.title ?? '';
+const description = directDescription ?? frontmatter?.description ?? 'Research notes on proof theory and logical foundations.';
+const isEnglish = Astro.currentLocale === 'en';
+const localePath = isEnglish ? Astro.url.pathname.replace(/^\/en(?=\/|$)/, '') || '/' : Astro.url.pathname;
+const japaneseHref = localePath;
+const englishHref = `/en${localePath}`;
+const navItems = [
+  { href: isEnglish ? '/en/about/' : '/about/', label: isEnglish ? 'About' : 'About' },
+  { href: isEnglish ? '/en/research/' : '/research/', label: isEnglish ? 'Research' : '研究' },
+  { href: isEnglish ? '/en/notes/' : '/notes/', label: isEnglish ? 'Notes' : 'ノート' },
+  { href: isEnglish ? '/en/contact/' : '/contact/', label: isEnglish ? 'Contact' : '連絡先' },
+];
+const currentPath = Astro.url.pathname;
+---
+<!doctype html>
+<html lang={isEnglish ? 'en' : 'ja'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title} · Ichikawa Koshiro</title>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="wordmark" href={isEnglish ? '/en/about/' : '/about/'} aria-label="Ichikawa Koshiro, about">Ichikawa Koshiro</a>
+        <div class="header-actions">
+          <nav aria-label="Main navigation">
+            {navItems.map((item) => (
+              <a class:list={{ active: currentPath === item.href }} href={item.href}>{item.label}</a>
+            ))}
+          </nav>
+          <div class="language-switch" aria-label="Language switcher">
+            <a class:list={{ active: !isEnglish }} href={japaneseHref} lang="ja">日本語</a>
+            <span aria-hidden="true">/</span>
+            <a class:list={{ active: isEnglish }} href={englishHref} lang="en">EN</a>
+          </div>
+        </div>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer class="site-footer">
+        <span>© {new Date().getFullYear()} Ichikawa Koshiro</span>
+      </footer>
+    </div>
+  </body>
+</html>
