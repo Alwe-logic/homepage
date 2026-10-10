@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TalkSlides from '../../components/TalkSlides.astro';
+import { suugakuto10 as talk } from '../../data/suugakuto-10';
+---
+<BaseLayout title={talk.event + ' · ' + talk.subtitle} description={talk.event + 'での発表「' + talk.title + '」のスライド公開ページ。'}>
+  <TalkSlides />
+</BaseLayout>

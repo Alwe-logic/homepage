@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import katex from 'katex';
+import { suugakuto10 as talk } from '../data/suugakuto-10';
 
 const pi12 = katex.renderToString('\\Pi^1_2', { throwOnError: false });
 const omega = katex.renderToString('\\omega', { throwOnError: false });
@@ -12,6 +13,7 @@ const preprints = [
 ];
 const papers = [];
 const presentations = [
+  { date: talk.date, year: '2026.10.12', title: talk.title, meta: talk.event, url: `${import.meta.env.BASE_URL}${talk.pagePath.replace(/^\//, '')}` },
   { date: '2026-06-30', year: '2026.06.30', title: 'A Survey of Higher Proof Theory', meta: 'IMS Graduate Summer School in Logic 2026（Student Talk）', url: 'https://ims.nus.edu.sg/wp-content/uploads/2026/07/LogicSS-abs-v7.pdf' },
   { date: '2026-06-21', year: '2026.06.21', title: '相対 Diers スペクトラムの構成', meta: '第1回小淵沢若手数学者勉強会', url: 'https://kobuchisawa-math-seminar.jp/en/past' },
   { date: '2026-02-20', year: '2026.02.20', title: '算術の無矛盾性証明への統一的手法', meta: '第9回数理新人', url: 'https://sites.google.com/view/math-graduate/MATHSCI-FRESHMAN-SEMINAR/2026' },
