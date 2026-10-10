@@ -34,7 +34,6 @@ const pdfHref = withBase(talk.pdfPath);
   </div>
   <img class="page-qr" src={withBase(talk.qrPath)} width="200" height="200" alt={english ? 'QR code linking to this page' : 'このページへのQRコード'} loading="lazy" />
 </section>
-<p class="back-link"><a class="text-link" href={withBase(english ? '/en/research/' : '/research/')}>{english ? '← Research' : '← 研究ページへ'}</a></p>
 <style>
   .talk-intro { max-width: 900px; }
   .talk-intro .eyebrow { font-size: 14px; color: var(--warm); margin: 0 0 24px; }
@@ -54,7 +53,6 @@ const pdfHref = withBase(talk.pdfPath);
   .page-url { overflow-wrap: anywhere; }
   .page-qr { flex-shrink: 0; width: 200px; height: 200px; }
   .qr-download { font-size: 14px; }
-  .back-link { margin-bottom: 56px; }
   @media (max-width: 640px) {
     .share-section { flex-direction: column; align-items: flex-start; }
     .talk-intro { padding-top: 48px; }
