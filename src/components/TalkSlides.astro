@@ -21,7 +21,7 @@ const pdfHref = withBase(talk.pdfPath);
   <details class="slides-preview">
     <summary>{english ? 'Preview on this page' : 'このページでプレビューする'}</summary>
     <object data={pdfHref} type="application/pdf" aria-label={english ? 'Presentation slides (Japanese PDF)' : '発表スライド（PDF）'}>
-      <p><a class="text-link" href={pdfHref}>{english ? 'Open the PDF' : 'PDFを開く'}</a></p>
+      {english ? 'If the preview is unavailable, use the Open PDF link above.' : 'プレビューを表示できない場合は、上の「スライドを読む」から開いてください。'}
     </object>
   </details>
 </section>
