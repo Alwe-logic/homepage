@@ -10,6 +10,7 @@ const pdfHref = withBase(talk.pdfPath);
   <h1>{talk.title}</h1>
   <p class="talk-subtitle">{talk.subtitle}</p>
   <p class="talk-author">Alwe <span lang="en">(@Alwe_Logic)</span></p>
+  <p class="talk-abstract"><a class="text-link" href={withBase(talk.abstractPath)} target="_blank" rel="noreferrer">{english ? 'Read the abstract (PDF) ↗' : '発表要旨を読む（PDF）↗'}</a></p>
 </section>
 <section class="section slides-section" aria-labelledby="slides-heading">
   <h2 id="slides-heading">{english ? 'Presentation slides' : '発表スライド'}</h2>
@@ -40,6 +41,7 @@ const pdfHref = withBase(talk.pdfPath);
   .talk-intro h1 { font-size: clamp(30px, 5vw, 52px); line-height: 1.5; letter-spacing: -.02em; }
   .talk-intro .talk-subtitle { margin-top: 16px; }
   .talk-intro .talk-author { margin-top: 12px; font-size: 16px; color: var(--ink); }
+  .talk-intro .talk-abstract { margin-top: 20px; font-size: 16px; }
   .slides-section { padding: 44px 0 56px; }
   .slides-section h2, .share-section h2 { font-size: 28px; }
   .slides-description { margin: 18px 0 0; color: var(--muted); }

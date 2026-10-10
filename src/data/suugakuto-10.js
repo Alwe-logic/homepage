@@ -5,6 +5,7 @@ export const suugakuto10 = {
   date: '2026-10-12',
   pagePath: '/talks/suugakuto-10/',
   pdfPath: '/slides/suugakuto-10/presentation_groups.pdf',
+  abstractPath: '/slides/suugakuto-10/abstract_groups.pdf',
   qrPath: '/slides/suugakuto-10/page-qr.png',
   publicUrl: 'https://alwe-logic.github.io/homepage/talks/suugakuto-10/',
 };
