@@ -14,10 +14,10 @@ const pdfHref = withBase(talk.pdfPath);
 </section>
 <section class="section slides-section" aria-labelledby="slides-heading">
   <h2 id="slides-heading">{english ? 'Presentation slides' : '発表スライド'}</h2>
-  <p class="slides-description">{english ? 'Slides in Japanese. Open the PDF to read it on your device, or download a copy.' : 'PDFをブラウザで閲覧、またはダウンロードできます。'}</p>
+  <p class="slides-description">{english ? 'Slides in Japanese, with each slide shown in full. Open the PDF to read it on your device, or download a copy.' : '段階表示をまとめた閲覧用PDFを公開しています。ブラウザで閲覧、またはダウンロードできます。'}</p>
   <div class="slides-actions">
     <a class="button" href={pdfHref} target="_blank" rel="noreferrer">{english ? 'Open PDF ↗' : 'スライドを読む ↗'}</a>
-    <a class="text-link" href={pdfHref} download="suugakuto-10-hott-groups.pdf">{english ? 'Download PDF' : 'PDFをダウンロード'}</a>
+    <a class="text-link" href={pdfHref} download="presentation_groups_handout.pdf">{english ? 'Download PDF' : 'PDFをダウンロード'}</a>
   </div>
   <details class="slides-preview">
     <summary>{english ? 'Preview on this page' : 'このページでプレビューする'}</summary>
